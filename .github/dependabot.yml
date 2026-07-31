@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # The extension bundles all of its own code, so a compromised dependency
+  # ships straight to users. Weekly, grouped, so it is one review rather than
+  # a stream of single-package pull requests.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      dev-dependencies:
+        dependency-type: development
+      production-dependencies:
+        dependency-type: production
+    commit-message:
+      prefix: chore
+      include: scope
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci

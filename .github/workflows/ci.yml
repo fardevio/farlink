@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # pnpm before Node, so setup-node can use the pnpm cache. The version
+      # comes from the packageManager field in package.json.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Format check, typecheck and tests. The same command contributors run.
+      - run: pnpm check
+
+      # The build is part of CI because two things are only checked there: the
+      # hook that strips host_permissions, and the manifest length limits that
+      # the Chrome Web Store enforces at upload.
+      - run: pnpm zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: farlink-chrome
+          path: build/*.zip
+          if-no-files-found: error

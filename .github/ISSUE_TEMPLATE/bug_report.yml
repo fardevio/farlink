@@ -1,0 +1,80 @@
+name: Bug report
+description: Something behaves differently from how it should
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The fields below are the ones that have
+        actually mattered for past bugs, which is why keyboard layout is in
+        there.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: And what you expected instead.
+      placeholder: |
+        I pressed Alt+T to change the theme and nothing happened. I expected
+        the theme to change and the name to appear in the corner.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+      placeholder: |
+        1. Open https://news.ycombinator.com
+        2. Press Cmd+Shift+Space
+        3. Press Alt+T
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Which page
+      description: A public URL if you can share one. "Any page" is a fine answer.
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: macOS 15.2 / Windows 11 / Fedora 41
+    validations:
+      required: true
+
+  - type: input
+    id: chrome
+    attributes:
+      label: Chrome version
+      description: From chrome://version
+      placeholder: "137.0.7151.104"
+    validations:
+      required: true
+
+  - type: input
+    id: layout
+    attributes:
+      label: Keyboard layout
+      description: >
+        This sounds irrelevant and is not. A surprising share of bugs here turn
+        out to be layout specific, because Option, AltGr and dead keys all
+        change what the browser reports.
+      placeholder: US QWERTY / German QWERTZ / Dvorak
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Anything in the console
+      description: >
+        Open DevTools on the page and look for lines starting with `[farlink]`.
+        Paste them here if there are any. This is optional.
+      render: text
+    validations:
+      required: false

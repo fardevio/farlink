@@ -1,0 +1,45 @@
+name: Idea or feature request
+description: Something FarLink should do that it does not
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before you write this up, one thing worth knowing: a long list of
+        features were built, used, and then deliberately removed. Grouping,
+        marks, batch actions, link hints, yank, a command palette, and per-site
+        permissions are all in that list. CONTRIBUTING.md explains why.
+
+        If your idea is one of those, that is fine, but the useful version of
+        the argument is "here is what changed since it was cut".
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: >
+        The situation, not the solution. What were you doing when you wanted
+        this?
+      placeholder: >
+        I read long GitHub issue threads and want to get to the last comment by
+        a specific person without scrolling.
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you have in mind
+      description: If you have a specific solution, describe it here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you do instead today
+      description: >
+        Including "nothing, I gave up". Knowing the current workaround says a
+        lot about how much the feature is worth.
+    validations:
+      required: false

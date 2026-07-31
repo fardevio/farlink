@@ -1,0 +1,14 @@
+# Normalise to LF in the repository, whatever the contributor's platform does.
+# Prettier checks with endOfLine "lf", so a Windows clone with core.autocrlf
+# left on would otherwise fail `pnpm check` on every file it touched.
+* text=auto eol=lf
+
+# Binary, so git never tries to normalise or diff them as text.
+*.png binary
+*.jpg binary
+*.ico binary
+*.zip binary
+*.pdf binary
+
+# Generated. Collapsed in pull request diffs and excluded from language stats.
+pnpm-lock.yaml linguist-generated=true -diff

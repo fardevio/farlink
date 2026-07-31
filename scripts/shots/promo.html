@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FarLink promo tile</title>
+    <style>
+      /*
+       * The Web Store's small promo tile, 440x280.
+       *
+       * Drawn at 220x140 CSS and captured at deviceScaleFactor 2, so every
+       * glyph lands on two device pixels and stays crisp at tile size.
+       *
+       * Deliberately not a shrunken screenshot. An earlier tile was a whole
+       * panel scaled to 361px wide, which put the panel's 12px type at roughly
+       * 7px — unreadable at the size this asset is actually shown.
+       *
+       * A tile has room for a name and one line, and that is all it gets. A row
+       * of key chips lived here briefly and came out: at 7px they were the least
+       * legible thing on the asset, they are documentation rather than
+       * recognition, and the key bar already appears in all five screenshots.
+       *
+       * Colours are the `far` flavour from lib/ui/palettes.ts, which is the
+       * default theme and the one the icon is built on. Keep them in step.
+       */
+      :root {
+        --bg: #0000aa;
+        --border: #55ffff;
+        --fg: #55ffff;
+        --accent: #ffff55;
+        --font:
+          "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Mono", Menlo,
+          Consolas, "DejaVu Sans Mono", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 220px;
+        height: 140px;
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--bg);
+        font-family: var(--font);
+        color: var(--fg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 13px;
+        padding: 0 18px;
+      }
+
+      /* The mark sits after the wordmark, so "FarLink" and the line beneath it
+         share one left edge. With the icon first, the wordmark started 52px in
+         and the two blocks of text did not line up with each other. */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* The shipped 96px icon at 48 CSS px, captured at deviceScaleFactor 2 —
+         so 96 device pixels onto a 96px source, 1:1, with no resampling at all.
+         That is the whole fix for the blockiness: this was the 128px icon at
+         40 CSS, a 0.625 downscale, and nearest-neighbour at a fractional ratio
+         merges some source pixels and drops others, so the arrow's blocks came
+         out uneven.
+
+         `pixelated` still matters even at 1:1, as a guarantee: the glyph is
+         drawn on an explicit pixel grid, and smoothing it is what turns the
+         blocks into the washed lavender scripts/make-icons.mjs exists to avoid.
+         Keep the CSS size, the source size and the capture scale in step — any
+         one of them changing reintroduces a fractional ratio. */
+      img {
+        width: 48px;
+        height: 48px;
+        image-rendering: pixelated;
+        display: block;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.6px;
+        line-height: 1;
+        color: var(--accent);
+      }
+
+      p {
+        /* 10px, not 10.5: the second line is 28 characters and the tile is
+           220px wide, so half a pixel of glyph width pushed "list." onto a
+           third line. */
+        font-size: 10px;
+        line-height: 1.6;
+        white-space: nowrap;
+        color: var(--fg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">
+      <h1>FarLink</h1>
+      <img src="./icon.png" alt="" />
+    </div>
+    <p>Every link on a page,<br />in one keyboard-driven list.</p>
+  </body>
+</html>

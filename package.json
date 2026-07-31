@@ -1,0 +1,62 @@
+{
+  "name": "farlink",
+  "version": "0.1.0",
+  "description": "Every link on a page, in one keyboard-driven list. A Chrome extension.",
+  "keywords": [
+    "chrome-extension",
+    "keyboard",
+    "accessibility",
+    "productivity",
+    "links",
+    "vimium-alternative",
+    "far-manager",
+    "yazi"
+  ],
+  "license": "MIT",
+  "author": "Far Chinberdiev <fardevio@gmail.com>",
+  "homepage": "https://github.com/fardevio/farlink#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fardevio/farlink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fardevio/farlink/issues"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.4",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "build:edge": "wxt build -b edge",
+    "zip": "wxt zip",
+    "zip:edge": "wxt zip -b edge",
+    "icons": "node scripts/make-icons.mjs",
+    "gallery": "esbuild scripts/make-gallery.ts --bundle --platform=node --format=cjs --outfile=.scratch/make-gallery.cjs --alias:~=. --log-level=warning && node .scratch/make-gallery.cjs .scratch/gallery.html",
+    "promo": "pnpm gallery && node .scratch/make-gallery.cjs .scratch/promo.html --promo",
+    "probe": "esbuild scripts/probe.ts --bundle --format=iife --global-name=__probe \"--footer:js=__probe.run()\" --outfile=.scratch/probe.js --log-level=warning --alias:~=.",
+    "compile": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:md": "markdownlint-cli2",
+    "check": "pnpm format:check && pnpm lint:md && pnpm compile && pnpm test",
+    "postinstall": "wxt prepare",
+    "shots": "bash scripts/make-shots.sh"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@types/chrome": "^0.0.287",
+    "esbuild": "^0.25.12",
+    "happy-dom": "^15.11.7",
+    "markdownlint-cli2": "^0.18.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "wxt": "^0.19.25"
+  }
+}

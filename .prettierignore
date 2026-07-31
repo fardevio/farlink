@@ -1,0 +1,12 @@
+node_modules
+build
+.wxt
+spikes
+pnpm-lock.yaml
+# Prose. Prettier reflows markdown tables into unreadable single lines.
+docs
+store
+README.md
+.scratch
+# Session scratch written by tooling, not source.
+.remember

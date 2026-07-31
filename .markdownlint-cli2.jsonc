@@ -1,0 +1,35 @@
+// Markdown lint. Prettier formats the code and a few of the prose files, but
+// .prettierignore deliberately keeps it away from docs/, store/ and README.md,
+// because it reflows markdown tables into single unreadable lines. That leaves
+// the prose unchecked, which is what this covers.
+{
+  "globs": ["**/*.md"],
+  "ignores": [
+    "node_modules",
+    "build",
+    ".wxt",
+    ".scratch",
+    ".remember",
+    "spikes"
+  ],
+  "config": {
+    "default": true,
+
+    // Prose wraps at 80, the same column the code uses. Two exceptions, both
+    // structural rather than preference: a table row cannot be wrapped without
+    // breaking the table, and the indented blocks in store/listing.md are
+    // copy-paste source for the Developer Dashboard, where an inserted line
+    // break would end up in the published listing.
+    "MD013": { "line_length": 80, "tables": false, "code_blocks": false },
+
+    // Table pipes are not aligned by column here. Prettier is kept away from
+    // these files on purpose, so alignment would have to be maintained by hand
+    // on every edit, and a misaligned pipe renders identically.
+    "MD060": false,
+
+    // store/listing.md uses both code block styles for two different jobs:
+    // indented for copy pasted verbatim into the store form, fenced with a
+    // language for commands meant to be run. One rule cannot allow both.
+    "MD046": false
+  }
+}

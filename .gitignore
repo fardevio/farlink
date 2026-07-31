@@ -1,0 +1,41 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+.env
+
+# wxt
+.wxt
+build
+
+# typescript
+.tsbuildinfo
+
+# worktrees
+.worktree*
+
+# agent + editor local state
+.claude
+.gstack/
+.remember/
+
+# Local scratch: generated previews, probes and shims (see scripts/)
+.scratch
+
+# Store screenshots are generated, not authored: `pnpm shots` rebuilds them from
+# the shipping bundle against live sites. Committing them means they go stale
+# silently — the first set outlived a panel resize and showed a shape the
+# product no longer had.
+/store/screenshots

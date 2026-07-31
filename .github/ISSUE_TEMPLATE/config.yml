@@ -1,0 +1,10 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/fardevio/farlink/security/advisories/new
+    about: Report privately. Please do not open a public issue for this.
+  - name: Question, or feedback that is not a bug
+    url: https://github.com/fardevio/farlink/discussions
+    about: >
+      Including "I tried this and it was not useful, here is why", which is
+      more valuable right now than most feature requests.
