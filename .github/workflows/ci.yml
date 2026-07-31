@@ -16,13 +16,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # pnpm before Node, so setup-node can use the pnpm cache. The version
       # comes from the packageManager field in package.json.
-      - uses: pnpm/action-setup@v4
+      #
+      # These are on their current majors because the runners now force Node 20
+      # actions onto Node 24 and warn about it; v4 of each was in that list.
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -37,7 +40,7 @@ jobs:
       # the Chrome Web Store enforces at upload.
       - run: pnpm zip
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: farlink-chrome
           path: build/*.zip
