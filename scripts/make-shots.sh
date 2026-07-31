@@ -121,10 +121,16 @@ done
 # chosen are the ones that differ most — DOS blue, a modern dark, a light paper
 # and a black-and-white retro. Six included two dark themes that read alike at
 # tile size.
-CELL_W=640
-CELL_H=400
-TILE_W=620
-magick -size 1280x800 "xc:#f2f2ef" "$WORK/3-canvas.png"
+#
+# Composited at 2560x1600, twice the store's format, because the cropped tiles
+# are already ~1160px wide at device resolution. Building straight to 1280x800
+# threw half of that away, and the README needs the other half: GitHub renders
+# a README image at roughly 830px, so a 1280px source is only ~1.5x on a retina
+# display. Each destination downsamples from this once.
+CELL_W=1280
+CELL_H=800
+TILE_W=1240
+magick -size 2560x1600 "xc:#f2f2ef" "$WORK/3-canvas.png"
 i=0
 for f in $THEMES; do
   magick "$WORK/t-$f.png" -resize "${TILE_W}x" "$WORK/t-$f-fit.png"
@@ -137,7 +143,7 @@ for f in $THEMES; do
     -geometry "+${x}+${y}" -composite "$WORK/3-canvas.png"
   i=$(( i + 1 ))
 done
-finish "$WORK/3-canvas.png" "$OUT/3-themes.png"
+finish "$WORK/3-canvas.png" "$OUT/3-themes.png" 1280x800
 
 echo "==> promo-440x280"
 $B viewport 220x140 --scale 2 >/dev/null
@@ -146,13 +152,18 @@ sleep 1
 $B screenshot --viewport "$WORK/promo.png" >/dev/null
 finish "$WORK/promo.png" "$OUT/promo-440x280.png"
 
-# The two the README embeds are copied into docs/media/, which IS tracked:
-# GitHub can only render an image that exists in the repo. Same capture, two
-# destinations, so the README cannot drift from the store set.
+# The two the README embeds are written into docs/media/, which IS tracked:
+# GitHub can only render an image that exists in the repo. Same captures as the
+# store set, so the README cannot drift from it.
+#
+# At 1920 wide, not the store's 1280. GitHub lays a README image out at about
+# 830px, so 1280 is only ~1.5x and looks soft on a retina display while 1920 is
+# a comfortable 2x. Taken from the full-resolution capture rather than upscaled
+# from the store file, which would add nothing. Not 2560: that is another 70%
+# of repo weight for detail the layout cannot show.
 echo "==> docs/media (tracked, for the README)"
-cp "$OUT/1-index.png" "$ROOT/docs/media/panel.png"
-cp "$OUT/3-themes.png" "$ROOT/docs/media/themes.png"
-echo "    panel.png, themes.png"
+finish "$WORK/1.png" "$ROOT/docs/media/panel.png" 1920x1200
+finish "$WORK/3-canvas.png" "$ROOT/docs/media/themes.png" 1920x1200
 
 echo
 echo "Done. store/screenshots is gitignored — upload from here:"
