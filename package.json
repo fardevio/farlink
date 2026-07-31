@@ -50,13 +50,22 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "@types/chrome": "^0.0.287",
-    "esbuild": "^0.25.12",
-    "happy-dom": "^15.11.7",
-    "markdownlint-cli2": "^0.18.1",
+    "@types/chrome": "^0.2.2",
+    "esbuild": "^0.28.1",
+    "happy-dom": "^20.11.1",
+    "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8",
-    "wxt": "^0.19.25"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10",
+    "wxt": "^0.21.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "uuid": ">=11.1.1",
+      "shell-quote": ">=1.9.0",
+      "tmp": ">=0.2.6",
+      "adm-zip": ">=0.6.0",
+      "brace-expansion": ">=5.0.8"
+    }
   }
 }

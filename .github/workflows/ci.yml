@@ -40,6 +40,12 @@ jobs:
       # the Chrome Web Store enforces at upload.
       - run: pnpm zip
 
+      # Edge too, because CONTRIBUTING says the two builds are byte-identical
+      # apart from the output directory and nothing was checking it. The diff
+      # below is the check; the artifact is only Chrome's.
+      - run: pnpm zip:edge
+      - run: diff -r build/chrome-mv3 build/edge-mv3
+
       - uses: actions/upload-artifact@v7
         with:
           name: farlink-chrome
