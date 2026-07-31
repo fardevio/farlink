@@ -37,5 +37,9 @@ build
 # Store screenshots are generated, not authored: `pnpm shots` rebuilds them from
 # the shipping bundle against live sites. Committing them means they go stale
 # silently — the first set outlived a panel resize and showed a shape the
-# product no longer had.
+# product no longer had. Upload them straight from here.
+#
+# docs/media/ is the exception and IS tracked: GitHub can only render a README
+# image that exists in the repo, so those two are documentation rather than
+# upload artifacts. `pnpm shots` refreshes them from the same capture.
 /store/screenshots

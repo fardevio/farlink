@@ -146,6 +146,15 @@ sleep 1
 $B screenshot --viewport "$WORK/promo.png" >/dev/null
 finish "$WORK/promo.png" "$OUT/promo-440x280.png"
 
+# The two the README embeds are copied into docs/media/, which IS tracked:
+# GitHub can only render an image that exists in the repo. Same capture, two
+# destinations, so the README cannot drift from the store set.
+echo "==> docs/media (tracked, for the README)"
+cp "$OUT/1-index.png" "$ROOT/docs/media/panel.png"
+cp "$OUT/3-themes.png" "$ROOT/docs/media/themes.png"
+echo "    panel.png, themes.png"
+
 echo
-echo "Done. These are build products and are gitignored — upload from here:"
+echo "Done. store/screenshots is gitignored — upload from here:"
 echo "  $OUT"
+echo "docs/media is tracked; commit it if the README images changed."

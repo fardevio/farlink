@@ -9,7 +9,7 @@ either. Arrows move, Enter opens.
 It is drawn like an orthodox file manager, because that is what it is for.
 Far Manager and yazi are the reference points.
 
-![The FarLink panel over Hacker News](store/screenshots/1-index.png)
+![The FarLink panel over Hacker News](docs/media/panel.png)
 
 ## When it helps
 
@@ -88,7 +88,7 @@ Thirteen, cycled with `Alt+T`: Far Manager, Yazi, Catppuccin Mocha, Nord,
 Paper, Solarized Light, High Contrast, Mono, Macintosh 1984, Windows XP, New
 Vegas, IBM 3270, Commodore 64.
 
-![Six of the thirteen themes](store/screenshots/3-themes.png)
+![Four of the thirteen themes: Far Manager, yazi, Paper, Macintosh 1984](docs/media/themes.png)
 
 Every one is checked by test for WCAG AA contrast on body text and on each
 text-on-fill pair. Adding one means adding a single entry to `FLAVORS` in
