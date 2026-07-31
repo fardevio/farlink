@@ -30,9 +30,22 @@ function press(
   key: string,
   modifiers: Partial<KeyboardEventInit> = {}
 ): boolean {
-  return keymap.handle(
-    new KeyboardEvent("keydown", { key, ...modifiers }) as KeyboardEvent
-  )
+  const event = new KeyboardEvent("keydown", { key, ...modifiers })
+  // State the modifier map rather than inheriting the environment's default.
+  //
+  // happy-dom >= 20 answers getModifierState("AltGraph") with whatever altKey
+  // is, so a plain Alt chord reports AltGr, isCharacterProduction() calls it a
+  // typed character, and every Alt chord in the suite goes dead. A real browser
+  // reports AltGraph only when AltGr is actually held. This is what
+  // platform.test.ts has always done for the same reason.
+  //
+  // The AltGr cases below stay honest: they pass {ctrlKey, altKey}, which
+  // isAltGraph() reads through its own ctrl+alt fallback, not through here.
+  Object.defineProperty(event, "getModifierState", {
+    value: () => false,
+    configurable: true
+  })
+  return keymap.handle(event as KeyboardEvent)
 }
 
 describe("normal mode", () => {

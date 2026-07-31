@@ -59,12 +59,13 @@ describe("isSkipped", () => {
 
 describe("isTransparentTag", () => {
   it("treats table grouping wrappers as pass-through", () => {
-    expect(isTransparentTag(one("<thead><tr><td>x</td></tr></thead>"))).toBe(
-      true
-    )
-    expect(isTransparentTag(one("<table><tr><td>x</td></tr></table>"))).toBe(
-      false
-    )
+    // The <thead> has to be parsed inside a <table>. A bare one is dropped
+    // outright by the HTML parser, which older happy-dom versions did not
+    // enforce, so this fixture used to yield null and `one()` handed it
+    // straight to tagOf.
+    const table = one("<table><thead><tr><td>x</td></tr></thead></table>")
+    expect(isTransparentTag(table.querySelector("thead")!)).toBe(true)
+    expect(isTransparentTag(table)).toBe(false)
   })
 })
 
