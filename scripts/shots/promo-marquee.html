@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FarLink marquee — B: the list itself</title>
+    <style>
+      /*
+       * The Web Store's marquee promo tile, 1400x560.
+       *
+       * Drawn at 700x280 CSS and captured at deviceScaleFactor 2, the same
+       * arrangement promo.html uses at 220x140, so every glyph lands on two
+       * device pixels and stays crisp at tile size.
+       *
+       * The tile IS a FarLink list: the real four bands — header, rows, status,
+       * key bar — at 20px instead of the product's 13px. That is a composition
+       * at marquee sizes, not the shrunken screenshot an earlier small tile
+       * was; scaling a real panel to this width put its 12px type at 7px.
+       *
+       * The 2.5:1 letterbox is why the bands run full width. The small tile's
+       * stacked wordmark-over-tagline does not scale to this shape: at 1400
+       * wide it leaves two thirds of the frame empty, and the bands fill it
+       * with the one thing worth showing.
+       *
+       * Colours are the `far` flavour from lib/ui/palettes.ts, which is the
+       * default theme and the one the icon is built on. Keep them in step.
+       */
+      :root {
+        --bg: #0000aa;
+        --bg-alt: #000088;
+        --panel: #000000;
+        --border: #55ffff;
+        --fg: #55ffff;
+        --dim: #aaaaaa;
+        --accent: #ffff55;
+        --cursor: #00aaaa;
+        --cursor-fg: #000000;
+        --font:
+          "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Mono", Menlo,
+          Consolas, "DejaVu Sans Mono", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 700px;
+        height: 280px;
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--bg);
+        font-family: var(--font);
+        color: var(--fg);
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* The bands run edge to edge, but everything inside them is inset 70px.
+         The marquee is cropped at narrow viewports and the safe area is the
+         centred 1120x480 of 1400x560 — 140 device px in from each side, which
+         is 70 CSS at scale 2. A band that bleeds is fine; a word that does
+         not survive the crop is not. */
+      header {
+        height: 56px;
+        flex: none;
+        /* Panel blue, not bg-alt. The product draws its header on bg-alt, but
+           the icon carries its own #0000aa field and reads as a lighter square
+           on anything else, and the shipped PNG is opaque so no blend mode
+           removes it. Painting the band in panel blue is also the closer
+           reading of Far itself, which draws column titles as accent text on
+           the panel rather than as a solid bar; the cyan rule below still
+           separates the band. */
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 0 70px;
+      }
+
+      h1 {
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: -0.9px;
+        line-height: 1;
+        color: var(--accent);
+      }
+
+      /* The shipped 96px icon at 48 CSS px, captured at deviceScaleFactor 2 —
+         96 device pixels onto a 96px source, 1:1, with no resampling at all.
+         The only other integer ratios this file offers are 96 CSS (2:1) and
+         144 (3:1); anything between merges some source pixels and drops
+         others, which is what made the arrow's blocks uneven once already.
+
+         `pixelated` still matters at 1:1, as a guarantee: the glyph is drawn
+         on an explicit pixel grid, and smoothing it is what turns the blocks
+         into the washed lavender scripts/make-icons.mjs exists to avoid. */
+      img {
+        width: 48px;
+        height: 48px;
+        image-rendering: pixelated;
+        display: block;
+      }
+
+      .count {
+        margin-left: auto;
+        font-size: 18px;
+        color: var(--dim);
+      }
+
+      .list {
+        flex: 1;
+        padding: 3px 0;
+      }
+
+      /* 36px rows carrying 20px type, against the product's 21px and 13px.
+         Sized so four rows fit the space the three fixed bands leave, and so
+         no title needs an ellipsis: one truncation reads as the product's real
+         behaviour, four read as a bug. */
+      .r {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 70px;
+        font-size: 20px;
+        white-space: nowrap;
+      }
+
+      .n {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .u {
+        color: var(--dim);
+        font-size: 17px;
+      }
+
+      .cur {
+        background: var(--cursor);
+        color: var(--cursor-fg);
+      }
+      .cur .u {
+        color: var(--cursor-fg);
+        opacity: 0.75;
+      }
+
+      /* The status line carries the sentence, which is the one thing the four
+         rows cannot say for themselves. */
+      .status {
+        height: 38px;
+        flex: none;
+        background: var(--bg-alt);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        padding: 0 70px;
+        font-size: 17px;
+      }
+
+      /* Far's function-key bar is black on cyan, the same pair as the panel
+         cursor, which is exactly how the original looks. Five groups need
+         556px of the 560 available at 15px, so this is the size at which the
+         bar still fits on one line — the same constraint the product's own
+         footer lives under. */
+      footer {
+        height: 36px;
+        flex: none;
+        background: var(--panel);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 70px;
+        font-size: 15px;
+        color: var(--dim);
+      }
+
+      .g {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .k {
+        background: var(--cursor);
+        color: var(--cursor-fg);
+        font-weight: 700;
+        padding: 1px 6px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>FarLink</h1>
+      <img src="./icon.png" alt="" />
+      <span class="count">197 links</span>
+    </header>
+
+    <div class="list">
+      <div class="r">
+        <span class="n">Show HN: a terminal file manager</span>
+        <span class="u">github.com</span>
+      </div>
+      <div class="r cur">
+        <span class="n">In praise of plain text</span>
+        <span class="u">danluu.com</span>
+      </div>
+      <div class="r">
+        <span class="n">The orthodox file manager</span>
+        <span class="u">arstechnica.com</span>
+      </div>
+      <div class="r">
+        <span class="n">Why keyboards beat pointing devices</span>
+        <span class="u">jnd.org</span>
+      </div>
+    </div>
+
+    <div class="status">Every link on a page, in one keyboard-driven list.</div>
+
+    <footer>
+      <span class="g"><span class="k">↑↓</span> move</span>
+      <span class="g"><span class="k">type</span> filter</span>
+      <span class="g"><span class="k">Enter</span> open</span>
+      <span class="g"><span class="k">⌥Enter</span> new tab</span>
+      <span class="g"><span class="k">Esc</span> exit</span>
+    </footer>
+  </body>
+</html>

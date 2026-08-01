@@ -152,6 +152,22 @@ sleep 1
 $B screenshot --viewport "$WORK/promo.png" >/dev/null
 finish "$WORK/promo.png" "$OUT/promo-440x280.png"
 
+# The marquee, at half its pixel size and scale 2 for the same reason the small
+# tile is: every glyph lands on two device pixels, and the 96px icon at 48 CSS
+# is exactly 1:1 with its source. Verified byte-identical to scripts/shots/
+# icon.png over the 96x96 it occupies — any other CSS size reintroduces the
+# fractional ratio that made the arrow's blocks uneven once already.
+#
+# Not downsampled, unlike the screenshots: this is drawn at its final size
+# rather than supersampled, because it is type and flat fills rather than a
+# captured page, and resampling flat fills can only lose.
+echo "==> promo-1400x560 (marquee)"
+$B viewport 700x280 --scale 2 >/dev/null
+$B goto "file://$ROOT/scripts/shots/promo-marquee.html" >/dev/null
+sleep 1
+$B screenshot --viewport "$WORK/marquee.png" >/dev/null
+finish "$WORK/marquee.png" "$OUT/promo-1400x560.png"
+
 # The two the README embeds are written into docs/media/, which IS tracked:
 # GitHub can only render an image that exists in the repo. Same captures as the
 # store set, so the README cannot drift from it.

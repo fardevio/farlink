@@ -171,6 +171,7 @@ alongside the single-purpose description and the per-permission justifications.
 | Screenshot 2 — MDN's CSS reference, 1,021 links narrowed to 18 as you type | 1280×800 | `store/screenshots/2-filter.png` |
 | Screenshot 3 — four of the thirteen themes: Far Manager, yazi, Paper, Macintosh 1984 | 1280×800 | `store/screenshots/3-themes.png` |
 | Small promo tile | 440×280 | `store/screenshots/promo-440x280.png` |
+| Marquee promo tile | 1400×560 | `store/screenshots/promo-1400x560.png` |
 
 The icon is U+2197 NORTH EAST ARROW set in **Geist Pixel**, on the `far`
 flavour's panel blue. `pnpm icons` renders it; there is no master raster, because
@@ -196,7 +197,20 @@ width and one gutter width throughout.
 Regenerating needs ImageMagick and Geist Pixel installed. Neither ships with the
 extension — the PNGs are committed, so this only matters if the icon changes.
 
-All three screenshots and the promo tile come from `pnpm shots`
+The two promo tiles are deliberately different compositions rather than one
+scaled to two sizes. The small tile is 1.57:1 and has room for a name and one
+line; the marquee is 2.5:1, where that stacked arrangement leaves two thirds of
+the frame empty. So the marquee is the panel itself — the real four bands at
+20px instead of the product's 13px — which is a composition at marquee sizes,
+not the shrunken screenshot an earlier small tile was.
+
+Its header is drawn in panel blue rather than `bgAlt`. The shipped icon carries
+its own `#0000aa` field and reads as a lighter square on any other band, and
+the PNG is opaque enough that no blend mode removes it; painting the band in
+panel blue is also the closer reading of Far, which draws column titles as
+accent text on the panel rather than as a solid bar.
+
+All three screenshots and the promo tiles come from `pnpm shots`
 (`scripts/make-shots.sh`), which builds the extension and drives the **real**
 content-script bundle against live pages through a small `chrome` shim, so what
 is captured is what ships. The theme and corner are seeded into
