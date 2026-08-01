@@ -134,6 +134,6 @@ few users. Treat it as early. Bug reports and rough edges are welcome; see
 
 ## Licence
 
-[MIT](LICENSE), © 2026 Far Chinberdiev.
+[MIT](LICENSE), © 2026 [Far Chinberdiev](https://fardev.io).
 
 FarLink is not affiliated with Far Manager. The name is a nod to it.
