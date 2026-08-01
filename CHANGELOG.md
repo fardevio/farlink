@@ -10,7 +10,7 @@ Nothing yet.
 
 ## [0.1.0]
 
-First version. Not published to the Chrome Web Store.
+First version. Published to the Chrome Web Store on 31 July 2026.
 
 ### Added
 

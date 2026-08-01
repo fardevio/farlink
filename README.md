@@ -25,7 +25,9 @@ If you use a link-hint extension, keep it. They coexist.
 
 ## Install
 
-Not on the Chrome Web Store yet. To run it locally:
+[**Add to Chrome**][store] — from the Chrome Web Store.
+
+To build it yourself instead:
 
 ```bash
 pnpm install
@@ -34,6 +36,8 @@ pnpm build
 
 Then open `chrome://extensions`, turn on Developer mode, and use **Load
 unpacked** on `build/chrome-mv3`.
+
+[store]: https://chromewebstore.google.com/detail/chfppficohobddfeafagjaecdbacepmh
 
 ## Keys
 
@@ -123,9 +127,9 @@ together and why the awkward parts are the way they are.
 
 ## Status
 
-Version 0.1.0. It builds, it runs, and it is tested on live pages, but it has
-not shipped to the Chrome Web Store and has not been used by anyone but its
-author. Treat it as early. Bug reports and rough edges are welcome; see
+Version 0.1.0, [on the Chrome Web Store][store] since 31 July 2026. It builds,
+it runs, and it is tested on live pages, but it is a first release and has had
+few users. Treat it as early. Bug reports and rough edges are welcome; see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence
