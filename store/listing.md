@@ -31,68 +31,46 @@ Productivity → Workflow & Planning
 ## Description
 
 ```text
-Link hints are great at clicking one link. They are not great at working
-through a page.
+Link hints are great at clicking one link. They are not great at working through a page.
 
-FarLink opens an index of every link on the page, the title on the left
-and the address on the right, and lets you filter it by either. Just
-type: there is no prefix key. Arrow keys move, Enter opens the link,
-Alt+Enter opens it in a background tab.
+FarLink opens an index of every link on the page, the title on the left and the address on the right, and lets you filter it by either. Just type: there is no prefix key. Arrow keys move, Enter opens the link, Alt+Enter opens it in a background tab.
 
-The panel is docked to one corner, so most of the page stays visible
-beside it, and nothing FarLink does ever scrolls the page out from under
-you.
+The panel is docked to one corner, so most of the page stays visible beside it, and nothing FarLink does ever scrolls the page out from under you.
 
-It is honest about the trade: for clicking a single link you have already
-spotted, Vimium's hints win. Where FarLink pays off is when you do not know
-where the thing is — a page of four hundred links you want to search by
-address, and read by destination rather than by position.
+It is honest about the trade: for clicking a single link you have already spotted, Vimium's hints win. Where FarLink pays off is when you do not know where the thing is — a page of four hundred links you want to search by address, and read by destination rather than by position.
 
 WHAT YOU GET
 
-• Every link on the page in one list. Start filtering by typing, matching
-  the title or the address
-• Arrow keys move; letters are left free for typing, never bound to
-  navigation
+• Every link on the page in one list. Start filtering by typing, matching the title or the address
+• Arrow keys move; letters are left free for typing, never bound to navigation
 • Enter to open it, Alt+Enter to open it in a background tab
 • Alt and the arrows to put the panel in any corner, Alt+S to resize it
-• Alt+comma for settings inside the panel: theme, size and corner, all
-  from the keyboard (Option on macOS)
+• Alt+comma for settings inside the panel: theme, size and corner, all from the keyboard (Option on macOS)
 • Nothing ever scrolls the page out from under you
-• Thirteen themes on Alt+T: Far Manager, yazi, Catppuccin, Nord, Paper,
-  Solarized Light, High Contrast, Mono, Macintosh 1984, Windows XP,
-  New Vegas, IBM 3270 and Commodore 64, every one checked for contrast
+• Thirteen themes on Alt+T: Far Manager, yazi, Catppuccin, Nord, Paper, Solarized Light, High Contrast, Mono, Macintosh 1984, Windows XP, New Vegas, IBM 3270 and Commodore 64, every one checked for contrast
 
 PERMISSIONS, AND WHY THERE ARE NONE WORTH THE NAME
 
-FarLink asks for no access to any website when you install it. The
-install prompt has no site access in it at all.
+FarLink asks for no access to any website when you install it. The install prompt has no site access in it at all.
 
-By default, when you press the shortcut or click the toolbar button, Chrome
-grants access to that one tab for that one invocation. That is the "activeTab"
-permission, and it is the whole story. The panel then stays available on
-that tab until you navigate away, so one key closes and reopens it.
+By default, when you press the shortcut or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
 
 FarLink never asks for access to all sites, or to any site.
 
 PRIVACY
 
-FarLink sends nothing anywhere. There is no server, no analytics, no
-telemetry, no account. Page content is read in the tab it came from and
-never leaves it. Your settings live in your browser profile.
+FarLink sends nothing anywhere. There is no server, no analytics, no telemetry, no account. Page content is read in the tab it came from and never leaves it. Your settings live in your browser profile.
 
 NOT A REPLACEMENT FOR
 
-Vimium, Surfingkeys and Vimari are excellent and FarLink sits alongside
-them. If you already use one, keep it. FarLink is for the tasks where
-link hints run out.
+Vimium, Surfingkeys and Vimari are excellent and FarLink sits alongside them. If you already use one, keep it. FarLink is for the tasks where link hints run out.
 ```
 
 ## Keywords
 
-keyboard navigation, vim, vimium alternative, no mouse, accessibility,
-power user, keyboard shortcuts, productivity, file manager, orthodox,
-far manager, yazi, link list, filter links, open in background tab
+```text
+keyboard navigation, vim, vimium alternative, no mouse, accessibility, power user, keyboard shortcuts, productivity, file manager, orthodox, far manager, yazi, link list, filter links, open in background tab
+```
 
 ---
 
@@ -100,11 +78,9 @@ far manager, yazi, link list, filter links, open in background tab
 
 ### Single purpose
 
-> FarLink lists the links on the current web page so they can be reached from
-> the keyboard. It reads the page's DOM to collect each link's accessible name
-> and destination, shows them in a panel the user can filter by either, and
-> opens the selected link, in the same tab or in a new one, when the user
-> presses Enter.
+```text
+FarLink lists the links on the current web page so they can be reached from the keyboard. It reads the page's DOM to collect each link's accessible name and destination, shows them in a panel the user can filter by either, and opens the selected link, in the same tab or in a new one, when the user presses Enter.
+```
 
 ### Permission justifications
 
@@ -117,8 +93,9 @@ far manager, yazi, link list, filter links, open in background tab
 
 ### Remote code
 
-> No. All code is bundled in the package. The extension does not fetch or
-> execute remote code, and has no network access of any kind.
+```text
+No. All code is bundled in the package. The extension does not fetch or execute remote code, and has no network access of any kind.
+```
 
 ### Data usage disclosures
 
