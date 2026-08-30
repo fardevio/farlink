@@ -10,7 +10,7 @@ describe("windowStart", () => {
   })
 
   it("holds still while the cursor moves inside the window", () => {
-    // The point of not centring: Down moves the cursor, not the list.
+    // The point of not centering: Down moves the cursor, not the list.
     let start = 0
     for (let cursor = 0; cursor <= ROWS - 4; cursor++) {
       start = windowStart(start, 500, cursor, ROWS)

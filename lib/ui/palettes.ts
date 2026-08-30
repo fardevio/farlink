@@ -1,7 +1,7 @@
 /**
- * Colour palettes for FarLink.
+ * Color palettes for FarLink.
  *
- * Each flavor carries a comment citing where its colours came from.
+ * Each flavor carries a comment citing where its colors came from.
  * Where a value was chosen by us rather than taken from a source, the
  * comment says so explicitly.
  */
@@ -13,7 +13,7 @@ export interface Palette {
   bgAlt: string
   /** Floating surface background: the filter bar and the settings rows. */
   panel: string
-  /** Border and separator colour. */
+  /** Border and separator color. */
   border: string
   /** Primary text. */
   fg: string
@@ -27,7 +27,7 @@ export interface Palette {
   cursor: string
   /** Text on the cursor row. */
   cursorFg: string
-  /** Warning / degraded-anchor colour. */
+  /** Warning / degraded-anchor color. */
   warn: string
 }
 
@@ -49,12 +49,12 @@ export const FLAVORS: Flavor[] = [
   //   Panel.Text.Highlight  F_LIGHTGRAY|B_BLUE
   //   Keybar.Text           F_BLACK|B_CYAN    (function-key bar)
   //   Keybar.Background     F_LIGHTGRAY|B_BLACK
-  // Those names resolve through the DOS 16-colour CGA/EGA/VGA palette
+  // Those names resolve through the DOS 16-color CGA/EGA/VGA palette
   // (en.wikipedia.org/wiki/Color_Graphics_Adapter): blue #0000aa,
   // cyan #00aaaa, light cyan #55ffff, yellow #ffff55, black #000000,
   // light gray #aaaaaa, light red #ff5555.
   // Chosen by us, not sourced: `bgAlt` (a darkened blue, since Far has no
-  // alternating-row colour) and `warn` (Far signals warnings with a red
+  // alternating-row color) and `warn` (Far signals warnings with a red
   // *background*, WarnDialog.Text = F_WHITE|B_RED, never a foreground on
   // the panel; DOS light red on the blue panel measures only 4.2:1, so
   // reach for the "contrast" flavor if that matters).
@@ -74,7 +74,7 @@ export const FLAVORS: Flavor[] = [
       cursor: "#00aaaa",
       cursorFg: "#000000",
       // Deviation from the DOS palette, on purpose. Light red #ff5555 on the
-      // blue panel measures 4.23:1, below AA, and this colour carries the
+      // blue panel measures 4.23:1, below AA, and this color carries the
       // "page changed, do not activate" warning. A user misreading that acts
       // on the wrong element, so legibility wins over fidelity here: 6.6:1.
       warn: "#ff9a9a"
@@ -82,7 +82,7 @@ export const FLAVORS: Flavor[] = [
   },
 
   // yazi ships no default hex palette. Its preset theme
-  // (yazi-config/preset/theme-dark.toml) sets ANSI colour *names*, which
+  // (yazi-config/preset/theme-dark.toml) sets ANSI color *names*, which
   // the user's terminal resolves. Confirmed against
   // yazi-rs.github.io/docs/configuration/theme. Role assignments verified
   // from that preset:
@@ -94,7 +94,7 @@ export const FLAVORS: Flavor[] = [
   // scheme (microsoft/terminal, src/cascadia/TerminalSettingsModel/
   // defaults.json) as a neutral reference ANSI palette; that choice of
   // reference is ours, since yazi has no canonical one. Also ours:
-  // `bgAlt`/`panel` (the preset sets no surface colours) and using ANSI 8
+  // `bgAlt`/`panel` (the preset sets no surface colors) and using ANSI 8
   // (#767676) for `border` rather than the preset's ANSI 7 (#cccccc), as a
   // 1px CSS rule reads much heavier than yazi's thin box-drawing glyph.
   {
@@ -199,7 +199,7 @@ export const FLAVORS: Flavor[] = [
   },
 
   // Grayscale, no hue at all. Not a homage to a specific machine. The point is
-  // a flavour that cannot clash with any page, since every colour it draws is
+  // a flavor that cannot clash with any page, since every color it draws is
   // on the same axis as the text.
   {
     id: "mono",
@@ -216,8 +216,8 @@ export const FLAVORS: Flavor[] = [
       accentFg: "#101010",
       cursor: "#d0d0d0",
       cursorFg: "#101010",
-      // No red available on a grey axis, so the warning reads by being the
-      // only mid-grey on a panel of near-white and near-black. Weaker than a
+      // No red available on a gray axis, so the warning reads by being the
+      // only mid-gray on a panel of near-white and near-black. Weaker than a
       // hue would be, and the honest cost of the constraint.
       warn: "#c8c8c8"
     }
@@ -225,7 +225,7 @@ export const FLAVORS: Flavor[] = [
 
   // Macintosh System 1 (1984) was a 512x342 1-bit display: every pixel was
   // black or white, and selection was literal inversion. So this is #000 on
-  // #fff with inverted cursor rows, and the greys exist only for the metadata
+  // #fff with inverted cursor rows, and the grays exist only for the metadata
   // column, which the original would have rendered as a 50% stipple.
   {
     id: "macintosh",
@@ -243,7 +243,7 @@ export const FLAVORS: Flavor[] = [
       cursor: "#000000",
       cursorFg: "#ffffff",
       // The one deviation: a 1-bit display had no way to say "warning", and
-      // this colour carries "do not activate this". Legibility of the warning
+      // this color carries "do not activate this". Legibility of the warning
       // beats fidelity to the hardware.
       warn: "#8a0000"
     }
@@ -252,7 +252,7 @@ export const FLAVORS: Flavor[] = [
   // Windows XP's Luna theme. #ece9d8 is the classic "button face" beige,
   // #0054e3 and #0831d9 the title-bar blues, #316ac5 the Explorer selection
   // fill. Values as they appear in the Luna .msstyles and in every screenshot
-  // of the era, including the one that prompted this flavour.
+  // of the era, including the one that prompted this flavor.
   {
     id: "luna",
     name: "Windows XP",
@@ -341,9 +341,9 @@ export const FLAVORS: Flavor[] = [
       cursor: "#88c0d0",
       cursorFg: "#2e3440",
       // Nord's own red, nord11 #bf616a, measures 3.9:1 on nord0 and 3.1:1 on
-      // nord1, so under AA on both, and this colour carries "do not activate".
+      // nord1, so under AA on both, and this color carries "do not activate".
       // Lightened until it clears on the darker *and* the lighter surface, the
-      // same deviation the Far flavour needed for the same reason.
+      // same deviation the Far flavor needed for the same reason.
       warn: "#eba3aa"
     }
   },

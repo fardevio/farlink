@@ -9,13 +9,13 @@
 
 <!--
 If it is a bug fix, how do you reproduce the bug?
-If it changes behaviour, what was the old behaviour and who might miss it?
+If it changes behavior, what was the old behavior and who might miss it?
 -->
 
 ## Checklist
 
 - [ ] `pnpm check` passes
-- [ ] New behaviour has a test, and I watched that test fail before it passed
+- [ ] New behavior has a test, and I watched that test fail before it passed
 - [ ] Screenshots below, if anything visible changed
 - [ ] I read the "Things that are decided" section of CONTRIBUTING.md and this
       does not quietly reverse one of them

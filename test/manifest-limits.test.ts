@@ -80,7 +80,7 @@ describe("permission posture", () => {
  * Declaring an `action` makes Chrome list `_execute_action` in the shortcuts
  * editor whether we declare it or not, and with no popup it fires
  * `action.onClicked`. A named toggle command alongside it was a second row and
- * a second code path for the same behaviour.
+ * a second code path for the same behavior.
  */
 describe("the command surface", () => {
   it("binds the key to Chrome's action command and declares no other", () => {
@@ -134,8 +134,8 @@ describe("icon sizes", () => {
     expect(generated).toEqual(declared)
   })
 
-  it("paints the background in the default theme's panel colour", () => {
-    // The icon restates a colour that lives in the palette. It cannot read it:
+  it("paints the background in the default theme's panel color", () => {
+    // The icon restates a color that lives in the palette. It cannot read it:
     // the generator is plain Node and the palette is TypeScript. So the copy is
     // held here instead, the same arrangement ROW_HEIGHT uses against the
     // stylesheet. Retuning the far palette without this would leave the toolbar

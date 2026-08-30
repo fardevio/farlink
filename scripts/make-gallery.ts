@@ -5,7 +5,7 @@ import { HUD_CSS } from "~/lib/ui/hud-css"
 import { findFlavor, FLAVORS, flavorVariables } from "~/lib/ui/themes"
 
 /**
- * Renders every flavour as a static level strip, for the Web Store theme
+ * Renders every flavor as a static level strip, for the Web Store theme
  * screenshot. Built from the real palettes and the real HUD stylesheet, so the
  * marketing asset cannot drift from the product.
  */
@@ -93,7 +93,7 @@ function strip(flavorId: string): string {
 }
 
 // The HUD stylesheet is written for a shadow root and positions .fl-frame
-// fixed. Rehost it: scope :host to .host and neutralise the fixed placement.
+// fixed. Rehost it: scope :host to .host and neutralize the fixed placement.
 const scoped = HUD_CSS.replace(/:host/g, ".host").replace(
   /\.fl-frame \{[^}]*\}/,
   `.fl-frame {
@@ -116,7 +116,7 @@ const scoped = HUD_CSS.replace(/:host/g, ".host").replace(
  * do not fit: the grid runs to five rows and the capture severs the fourth,
  * which reads as a rendering fault rather than as a list that continues.
  * `--store` shows a complete two-row grid and lets the heading carry the
- * count. Without the flag the page shows every flavour, which is what makes
+ * count. Without the flag the page shows every flavor, which is what makes
  * it useful for checking a palette you just added.
  */
 const storeMode = process.argv.includes("--store")
@@ -179,7 +179,7 @@ console.log(`wrote ${out}`)
 /**
  * The heading reads as prose, so the count is spelled. It is derived from
  * FLAVORS rather than typed: the previous heading said "Fourteen" for two
- * flavours after the list stopped having fourteen.
+ * flavors after the list stopped having fourteen.
  */
 function spelled(n: number): string {
   const words = [

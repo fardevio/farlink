@@ -116,7 +116,7 @@ const REVEAL_MARGIN = 80
  *
  * The tall case is the one that matters. A container taller than the viewport
  * can never be fully visible, so "is all of it on screen?" always answers no
- * and centring it scrolls to its *middle*. On Wikipedia the cursor once landed
+ * and centering it scrolls to its *middle*. On Wikipedia the cursor once landed
  * on the article container, about 5,000 px tall, and revealing it jumped a
  * third of the way down the page. For anything that large the only sensible
  * question is whether its start is visible.
@@ -144,8 +144,8 @@ export function revealPlan(
   const below = rect.bottom > bottom - REVEAL_MARGIN
   if (!above && !below) return "none"
 
-  // `scrollIntoView` centres in the scrollport, not in the band, and with the
-  // panel docked those are different places, because centring a covered element puts
+  // `scrollIntoView` centers in the scrollport, not in the band, and with the
+  // panel docked those are different places, because centering a covered element puts
   // it straight back behind the panel. "start" is the top of the scrollport,
   // which is inside the band whenever the band is the upper one, and the panel
   // is bottom-anchored.

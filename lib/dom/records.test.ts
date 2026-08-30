@@ -58,7 +58,7 @@ describe("single-column list", () => {
     // Assert the outcome, not the arithmetic. This used to read
     // `expect(group.signals.G * 0.35).toBeLessThan(0.65)`, which cannot fail:
     // `geometry()` returns clamp01, so G <= 1 and G * 0.35 <= 0.35 for every
-    // possible input. The test passed while the behaviour it demanded did not
+    // possible input. The test passed while the behavior it demanded did not
     // happen — these ten boxes were detected as a record set at 0.82.
     expect(detect(root)).toHaveLength(0)
   })

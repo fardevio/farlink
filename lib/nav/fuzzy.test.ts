@@ -47,7 +47,7 @@ describe("fuzzyMatch", () => {
     expect(scoreOf("s", "settings")).toBeGreaterThan(scoreOf("s", "up sell"))
   })
 
-  it("penalises longer haystacks so ties break towards short names", () => {
+  it("penalizes longer haystacks so ties break towards short names", () => {
     const short = scoreOf("go", "go")
     const long = scoreOf("go", "go " + "x".repeat(120))
     expect(short).toBeGreaterThan(long)

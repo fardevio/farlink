@@ -133,14 +133,14 @@ const MARGIN = 3
 /**
  * Where the visible window starts, given where it started last time.
  *
- * Deliberately *not* centred on the cursor. Centring keeps the highlight in one
+ * Deliberately *not* centered on the cursor. Centring keeps the highlight in one
  * place and slides every row past it, so pressing Down makes the whole list jump
  * upward while the thing you are pointing at stays put. The cursor stops
  * feeling like the thing that moves, which inverts what the keypress means. A
  * stable window that the cursor travels inside, scrolling only when it reaches a
  * margin from the edge, is what a file manager does and what an editor does.
  *
- * Pure and exported so this is testable: it is stateful behaviour across
+ * Pure and exported so this is testable: it is stateful behavior across
  * renders, which is exactly the kind that goes subtly wrong.
  */
 export function windowStart(

@@ -54,7 +54,7 @@ describe("isLetterChord", () => {
 
 describe("isAltGraph and isCharacterProduction", () => {
   // These branch on the platform, which the suite cannot change, so each case
-  // asserts whichever behaviour is correct for the platform it runs on.
+  // asserts whichever behavior is correct for the platform it runs on.
   const mac = /^mac/i.test(navigator.platform)
 
   it("reads Ctrl+Alt as AltGr off macOS, and as nothing on it", () => {

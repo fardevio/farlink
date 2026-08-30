@@ -45,7 +45,7 @@ describe("cached", () => {
   })
 
   it("computes fresh outside a pass, every time", () => {
-    // Documented behaviour: callers outside beginPass/endPass get no caching.
+    // Documented behavior: callers outside beginPass/endPass get no caching.
     const store = newStore<number>()
     const node = el()
     let calls = 0

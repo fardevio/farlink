@@ -37,12 +37,12 @@ import {
 
 let settings: Settings = DEFAULT_SETTINGS
 let agent: Agent | null = null
-/** The concrete flavour in force, with "auto" resolved. */
+/** The concrete flavor in force, with "auto" resolved. */
 function flavorNow(): string {
   return resolveFlavor(settings.flavorId).id
 }
 
-/** The flavour `delta` steps from the current one, wrapping. */
+/** The flavor `delta` steps from the current one, wrapping. */
 function stepFlavorId(id: string, delta: 1 | -1): string {
   if (delta === 1) return nextFlavorId(id, flavorNow())
   const ids = FLAVORS.map((f) => f.id)

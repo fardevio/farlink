@@ -7,7 +7,7 @@
  * and pulling a utility framework into the hot path.
  *
  * Everything is in px, because a host page's root font-size must not be able to
- * resize the panel, and every colour goes through a `--fl-*` variable set by
+ * resize the panel, and every color goes through a `--fl-*` variable set by
  * applyFlavor().
  */
 export const HUD_CSS = `
@@ -80,8 +80,8 @@ export const HUD_CSS = `
 /* ---- header ---- */
 
 /* Far draws column titles as accent text on the panel, not as a solid accent
-   bar. Following that keeps the header legible in every flavour without
-   needing a second colour behind it. */
+   bar. Following that keeps the header legible in every flavor without
+   needing a second color behind it. */
 .fl-header {
   display: flex;
   align-items: center;
@@ -169,8 +169,8 @@ export const HUD_CSS = `
 .fl-row-divider .fl-url { display: none; }
 
 /* Openable rows read as links, because Enter goes somewhere instead of stepping
-   a value. Underlined in the primary colour rather than the accent: fg is
-   contrast-tested against both backgrounds in every flavour, while accent is
+   a value. Underlined in the primary color rather than the accent: fg is
+   contrast-tested against both backgrounds in every flavor, while accent is
    only ever verified behind accentFg. */
 .fl-row-openable .fl-url {
   color: var(--fl-fg);
@@ -188,7 +188,7 @@ export const HUD_CSS = `
 /* Matched characters get a background rather than a weight change. Bold in a
    monospace face is a weak signal at this size, and it was the same signal the
    marked rows used to use. The accent / accent-fg pair is contrast-verified in
-   every flavour, so the highlight carries its own legibility and needs no
+   every flavor, so the highlight carries its own legibility and needs no
    special case for the cursor row underneath it. No padding: a background on
    inline text keeps the monospace grid, and padding would shift every character
    after it. */

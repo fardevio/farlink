@@ -15,10 +15,10 @@ import type { Flavor, Palette } from "~/lib/ui/themes"
 
 /**
  * Derived, not typed out. This list was maintained by hand beside the `Palette`
- * interface and had to be edited in lockstep with it; every flavour's palette
- * is checked against `Palette` at compile time, so the first flavour's keys are
- * already an authoritative list, and the per-flavour test below holds every
- * other flavour to them.
+ * interface and had to be edited in lockstep with it; every flavor's palette
+ * is checked against `Palette` at compile time, so the first flavor's keys are
+ * already an authoritative list, and the per-flavor test below holds every
+ * other flavor to them.
  */
 const PALETTE_KEYS = Object.keys(FLAVORS[0]!.palette) as (keyof Palette)[]
 
@@ -35,9 +35,9 @@ const ratio = (flavor: Flavor, fg: keyof Palette, bg: keyof Palette) =>
   contrastRatio(flavor.palette[fg], flavor.palette[bg])
 
 describe("FLAVORS", () => {
-  it("defines no colour that nothing reads", () => {
+  it("defines no color that nothing reads", () => {
     // `mark`, `hint` and `hintFg` outlived the features that drew them by
-    // three weeks, carried by every flavour. The per-flavour test below proves
+    // three weeks, carried by every flavor. The per-flavor test below proves
     // a key exists everywhere; it cannot prove anything wants it. This is the
     // other direction. Consumers are the stylesheet and the one module that
     // sets a variable directly, so both are scanned.
@@ -52,17 +52,12 @@ describe("FLAVORS", () => {
     expect([...PALETTE_KEYS].filter((key) => !used.has(key))).toEqual([])
   })
 
-  it.each(FLAVORS)(
-    "$id defines every palette key as a hex colour",
-    (flavor) => {
-      expect(Object.keys(flavor.palette).sort()).toEqual(
-        [...PALETTE_KEYS].sort()
-      )
-      for (const key of PALETTE_KEYS) {
-        expect(flavor.palette[key]).toMatch(HEX)
-      }
+  it.each(FLAVORS)("$id defines every palette key as a hex color", (flavor) => {
+    expect(Object.keys(flavor.palette).sort()).toEqual([...PALETTE_KEYS].sort())
+    for (const key of PALETTE_KEYS) {
+      expect(flavor.palette[key]).toMatch(HEX)
     }
-  )
+  })
 
   it("gives every flavor an id, a name and a scheme", () => {
     for (const flavor of FLAVORS) {
@@ -90,11 +85,11 @@ describe("contrastRatio", () => {
     expect(contrastRatio("#000000", "#ffffff")).toBeCloseTo(21, 10)
   })
 
-  it("gives 1:1 for a colour against itself", () => {
+  it("gives 1:1 for a color against itself", () => {
     expect(contrastRatio("#3a96dd", "#3a96dd")).toBeCloseTo(1, 10)
   })
 
-  it("matches hand-computed mid-grey pairs", () => {
+  it("matches hand-computed mid-gray pairs", () => {
     // #808080: channel = ((128/255 + 0.055) / 1.055) ** 2.4 = 0.2158587,
     // and the three weights sum to 1, so L = 0.2158587.
     //   vs white: 1.05 / 0.2658587      = 3.9495
@@ -155,7 +150,7 @@ describe("resolveFlavor", () => {
     expect(resolveFlavor("catppuccin").id).toBe("catppuccin")
   })
 
-  it("resolves auto against the user's colour scheme", () => {
+  it("resolves auto against the user's color scheme", () => {
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches
@@ -208,13 +203,13 @@ describe("applyFlavor", () => {
 })
 
 /**
- * One test per property, not one per flavour.
+ * One test per property, not one per flavor.
  *
  * These looped over FLAVORS to make 26 separate cases, which reported as 26
  * tests for two facts. The loop is inside now and each assertion names the
- * flavour it is about, so a failure still says which palette broke.
+ * flavor it is about, so a failure still says which palette broke.
  */
-describe("readable text in every flavour", () => {
+describe("readable text in every flavor", () => {
   it("clears AA for dim and warn on both backgrounds", () => {
     // `dim` carries role labels, child counts and footer hints; `warn` carries
     // the degraded-anchor notice, which a user must not misread. Both are
@@ -272,7 +267,7 @@ describe("nextFlavorId", () => {
     expect(nextFlavorId(ids[ids.length - 1]!, "")).toBe(ids[0])
   })
 
-  it("steps off the resolved flavour when set to auto", () => {
+  it("steps off the resolved flavor when set to auto", () => {
     // Otherwise the first press looks like it skipped one: "auto" is not in the
     // list, so a naive lookup returns -1 and lands on index 0.
     expect(nextFlavorId("auto", "far")).toBe(FLAVORS[1]!.id)
@@ -282,7 +277,7 @@ describe("nextFlavorId", () => {
   })
 })
 
-describe("the flavour list stays extensible", () => {
+describe("the flavor list stays extensible", () => {
   it("needs nothing but a palette to add one", () => {
     // Every check in this file iterates FLAVORS, so a new entry is contrast-
     // tested, key-checked and hex-validated without touching a test. This

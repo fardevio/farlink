@@ -1000,7 +1000,7 @@ export class NavSession {
    * Step to the next theme.
    *
    * Delegated rather than implemented here: the session knows nothing about
-   * colour, and the flavour has to be persisted through settings, which is the
+   * color, and the flavor has to be persisted through settings, which is the
    * page agent's business.
    */
   cycleTheme(): void {

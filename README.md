@@ -101,7 +101,7 @@ checked without touching a test.
 
 ## Platforms
 
-macOS, Windows and Linux. The differences that matter are behavioural, not
+macOS, Windows and Linux. The differences that matter are behavioral, not
 cosmetic, and they live in `lib/platform.ts`: on macOS Option rewrites
 `event.key`, so `Option+T` arrives as `†`; on Windows and Linux AltGr arrives
 as Ctrl+Alt, which is also how `\` is typed on several European layouts.

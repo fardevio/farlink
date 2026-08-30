@@ -24,8 +24,8 @@ describe("the HUD stylesheet source", () => {
 })
 
 describe("the HUD stylesheet", () => {
-  it("declares every colour through a variable", () => {
-    // A literal colour cannot be themed, and six flavours are contrast-tested
+  it("declares every color through a variable", () => {
+    // A literal color cannot be themed, and six flavors are contrast-tested
     // on the variables rather than on whatever the sheet happens to hard-code.
     const literals = HUD_CSS.match(/#[0-9a-f]{3,8}\b/gi) ?? []
     const allowed = literals.filter((hex) =>

@@ -85,15 +85,14 @@ function geometry(canvas) {
 const RADIUS = 0.05
 
 const magick = (args) =>
-  // stderr is discarded on purpose: the point-size search renders sizes that
-  // produce no ink, and -trim warns on an empty image dozens of times per run.
-  // renderGlyph turns that into a null rather than reading the warning.
-  // No -quiet flag: `magick -quiet identify` is not valid, the subcommand has to
-  // come first, and prefixing it made every probe look like a failure.
+  // stderr is inherited rather than discarded. It used to be dropped because
+  // the point-size search rendered sizes that produced no ink and -trim warned
+  // on each one, dozens of times per run. That search is gone, so a warning
+  // here now means something is actually wrong and should be seen.
   execFileSync("magick", args, {
     encoding: "utf8",
     maxBuffer: 1 << 26,
-    stdio: ["ignore", "pipe", "ignore"]
+    stdio: ["ignore", "pipe", "inherit"]
   })
 
 const scratch = join(tmpdir(), `farlink-icons-${process.pid}`)
@@ -129,9 +128,9 @@ function drawArrow({ box, bar, band }) {
 }
 
 /**
- * Writes a grid as a PNG, centred on a transparent canvas.
+ * Writes a grid as a PNG, centered on a transparent canvas.
  *
- * Via ImageMagick's pixel enumeration, where the parenthesised tuple is the
+ * Via ImageMagick's pixel enumeration, where the parenthesized tuple is the
  * value read and the trailing hex is only a comment. Setting the hex without the
  * tuple produced a fully transparent image.
  */

@@ -47,7 +47,7 @@ filtering. There is no prefix key and no separate search mode. A list you search
 beats a list you steer.
 
 **No UI framework and no runtime dependencies.** The panel is vanilla DOM in a
-closed shadow root with a randomised host tag. `package.json` has no
+closed shadow root with a randomized host tag. `package.json` has no
 `dependencies` block. The performance budget does not survive a framework on the
 injection path, and a closed root with a random tag is what keeps the page from
 styling, reading or scripting the panel.
@@ -170,15 +170,15 @@ explanation, and do not address a reviewer.
 Unit tests sit beside their module. Tests that span modules live in `test/`.
 
 **A test that has never failed is not a guard.** Break the thing it protects and
-watch it go red before you keep it. New behaviour needs a test.
+watch it go red before you keep it. New behavior needs a test.
 
 Four suites exist to catch classes of mistake rather than specific bugs. Know
 what they cover before you change the code underneath them:
 
 - `lib/ui/hud-css.test.ts` reads its own source to prove the stylesheet literal
   holds no stray backtick.
-- `lib/ui/themes.test.ts` checks every flavour for WCAG AA contrast, and fails
-  on any palette colour the stylesheet never reads.
+- `lib/ui/themes.test.ts` checks every flavor for WCAG AA contrast, and fails
+  on any palette color the stylesheet never reads.
 - `test/manifest-limits.test.ts` counts the manifest fields the Chrome Web Store
   limits. The same assertion runs in the build hook, so `pnpm zip` fails rather
   than producing a package that cannot be uploaded.
@@ -192,17 +192,17 @@ The easiest way in, and the one place built to be extended by someone who has
 not read the rest.
 
 Append one entry to `FLAVORS` in `lib/ui/palettes.ts`. Nothing else needs
-touching: there is no per-flavour branching anywhere, and `flavorVariables()` in
+touching: there is no per-flavor branching anywhere, and `flavorVariables()` in
 `lib/ui/themes.ts` turns each palette key into a `--fl-*` custom property by
-iteration, so a colour becomes a CSS variable without any CSS.
+iteration, so a color becomes a CSS variable without any CSS.
 
 Two standards, both easier to meet up front than to retrofit. **Cite the
-colours**: name the source file, hardware table or published scheme, and mark
+colors**: name the source file, hardware table or published scheme, and mark
 any value chosen rather than sourced. **WCAG AA beats fidelity**: if a faithful
 port fails contrast, bend the port and say so in a comment. The contrast suite
 is not negotiable.
 
-`pnpm gallery` renders every flavour into `.scratch/gallery.html`.
+`pnpm gallery` renders every flavor into `.scratch/gallery.html`.
 
 ## Commits and pull requests
 
@@ -235,7 +235,7 @@ The bar is "here is what changed since it was cut".
 ## Before you hand back
 
 - `pnpm check` passes.
-- New behaviour has a test, and you watched it fail before it passed.
+- New behavior has a test, and you watched it fail before it passed.
 - `git diff` contains only files you meant to change.
 - No new runtime dependency, no widened manifest, no network call.
 - Anything users would notice is in `CHANGELOG.md` under `Unreleased`.

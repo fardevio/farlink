@@ -57,7 +57,7 @@ export const MANIFEST = {
    * Declaring an `action` makes Chrome list `_execute_action` in
    * chrome://extensions/shortcuts whether we want it or not, and with no popup
    * it fires `action.onClicked` -- which is exactly what a named toggle command
-   * did. Two rows, two code paths, one behaviour. Putting the key here leaves
+   * did. Two rows, two code paths, one behavior. Putting the key here leaves
    * one row that does one thing, and the toolbar click and the chord are then
    * the same call rather than two that have to agree.
    *

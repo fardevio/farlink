@@ -60,7 +60,7 @@ content script's `matches`. Without it, the entry reappears.
 
 ## The panel is vanilla DOM
 
-The panel is built by hand in a closed shadow root with a randomised host tag.
+The panel is built by hand in a closed shadow root with a randomized host tag.
 No React, no framework, no CSS-in-JS. There is no UI framework anywhere in
 the project: the extension has no runtime dependencies at all.
 
@@ -94,7 +94,7 @@ because tiering put scattered title matches above exact address matches: on
 Hacker News, filtering for `item` showed eight rows of `itsallaboutthebit.com`
 above every `/item?id=`.
 
-**The selection is not centred.** The visible window scrolls only when the
+**The selection is not centered.** The visible window scrolls only when the
 selection comes within three rows of an edge, the way an editor does. Centring
 keeps the highlight still and slides the list past it, so pressing Down moves
 everything except the thing you are pointing at.
@@ -141,7 +141,7 @@ classes of mistake rather than specific bugs:
 - `lib/ui/hud-css.test.ts` reads its own source to prove the stylesheet
   literal contains no stray backtick.
 - `lib/ui/themes.test.ts` scans the stylesheet for `--fl-*` and fails on any
-  palette colour nothing reads. Three orphaned colours once survived in every
+  palette color nothing reads. Three orphaned colors once survived in every
   theme for three weeks.
 - `test/manifest-limits.test.ts` counts the manifest fields the Chrome Web
   Store limits. The name shipped four characters over and would have been

@@ -1,5 +1,5 @@
 /**
- * The platform differences that change behaviour, not just wording.
+ * The platform differences that change behavior, not just wording.
  *
  * Both traps here have bitten: matching chords on `event.key` killed every
  * Option chord on macOS, and reading AltGr as a chord swallowed characters

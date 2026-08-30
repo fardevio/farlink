@@ -10,7 +10,7 @@ import { MANIFEST } from "~/manifest"
 /**
  * The cross-platform invariants, held in one place.
  *
- * `lib/platform.ts` covers the *behaviour* that differs by OS and is tested
+ * `lib/platform.ts` covers the *behavior* that differs by OS and is tested
  * next to itself. What is left is a set of facts that are only wrong on a
  * machine the author does not have: a font stack that names no face the host
  * ships, a command with no binding outside macOS, a row height that drifted

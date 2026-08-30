@@ -126,7 +126,7 @@ describe("the content script boots", () => {
 
     const tag = hostTag()
     expect(tag, "the host is created on demand").not.toBeNull()
-    // Randomised suffix, so a page cannot ship a static CSS rule targeting it.
+    // Randomized suffix, so a page cannot ship a static CSS rule targeting it.
     expect(tag).toMatch(/^farlink-[a-z0-9]{4,8}$/)
     const host = document.documentElement.querySelector(tag!)!
     expect(

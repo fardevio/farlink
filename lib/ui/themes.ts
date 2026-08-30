@@ -16,9 +16,9 @@ export function findFlavor(id: string): Flavor {
 }
 
 /**
- * The next flavour after `id`, wrapping around.
+ * The next flavor after `id`, wrapping around.
  *
- * "auto" resolves first, so cycling from it steps off the resolved flavour
+ * "auto" resolves first, so cycling from it steps off the resolved flavor
  * rather than jumping to the second in the list — otherwise the first press
  * looks like it skipped one.
  */
@@ -29,8 +29,8 @@ export function nextFlavorId(id: string, resolved: string): string {
 }
 
 /**
- * Resolve "auto" against the *user's* colour scheme, not the page's. A dark
- * page with a light OS theme should still get the light flavour if that is
+ * Resolve "auto" against the *user's* color scheme, not the page's. A dark
+ * page with a light OS theme should still get the light flavor if that is
  * what the user asked for.
  */
 export function resolveFlavor(
@@ -45,7 +45,7 @@ export function resolveFlavor(
   return findFlavor(prefersDark ? autoDark : autoLight)
 }
 
-/** The `--fl-*` custom properties for a flavour. */
+/** The `--fl-*` custom properties for a flavor. */
 export function flavorVariables(flavor: Flavor): Record<string, string> {
   const palette = flavor.palette
   const vars: Record<string, string> = { "--fl-font": MONO_STACK }

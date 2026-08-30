@@ -39,10 +39,10 @@ Worth knowing before you assess anything:
 
 ## Design choices that are security choices
 
-- The panel lives in a **closed shadow root** with a randomised host tag, so
+- The panel lives in a **closed shadow root** with a randomized host tag, so
   page scripts cannot reach into it or style it.
 - The key listener runs in the **capture phase** and checks `isTrusted`, so a
-  page cannot synthesise keystrokes to drive the extension.
+  page cannot synthesize keystrokes to drive the extension.
 - Link text is written with `textContent`, never `innerHTML`. Page-controlled
   strings are never parsed as markup.
 - `javascript:` URLs are never listed as addresses and are never handed to the

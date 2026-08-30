@@ -47,7 +47,7 @@ First version. Published to the Chrome Web Store on 31 July 2026.
   shortcut or click the button.
 
 - No network requests, no clipboard access, no remote code.
-- The panel lives in a closed shadow root with a randomised host tag. Link text
+- The panel lives in a closed shadow root with a randomized host tag. Link text
   is written with `textContent`, and `javascript:` URLs are never shown as
   addresses or opened in a tab.
 

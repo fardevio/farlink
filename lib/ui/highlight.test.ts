@@ -11,7 +11,7 @@ describe("revealPlan", () => {
     expect(revealPlan(rect(0, 200, 900, 100), VIEWPORT)).toBe("none")
   })
 
-  it("centres a small element that is off screen", () => {
+  it("centers a small element that is off screen", () => {
     expect(revealPlan(rect(0, 2000, 900, 100), VIEWPORT)).toBe("center")
     expect(revealPlan(rect(0, -300, 900, 100), VIEWPORT)).toBe("center")
   })
@@ -42,7 +42,7 @@ describe("revealPlan with the panel in the way", () => {
     expect(revealPlan(rect(900, 600, 400, 20), VIEWPORT, PANEL)).toBe("none")
   })
 
-  it("centres rather than topping out when nothing is in the way", () => {
+  it("centers rather than topping out when nothing is in the way", () => {
     expect(revealPlan(rect(900, 2000, 400, 20), VIEWPORT, PANEL)).toBe("center")
   })
 })

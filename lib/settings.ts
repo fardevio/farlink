@@ -1,7 +1,7 @@
 import { DEFAULT_FLAVOR } from "~/lib/ui/themes"
 
 export interface Settings {
-  /** A flavour id from lib/ui/palettes.ts, or "auto". */
+  /** A flavor id from lib/ui/palettes.ts, or "auto". */
   flavorId: string
   /** Which corner the panel sits in. Moved with Alt and the arrow keys. */
   dockX: "left" | "right"

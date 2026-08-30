@@ -102,9 +102,9 @@ This is the easiest way in, and the one place the code was built to be extended
 by someone who has not read the rest of it.
 
 Append one entry to `FLAVORS` in `lib/ui/palettes.ts`. Nothing else needs
-touching: there is no per-flavour branching anywhere, and `flavorVariables()`
+touching: there is no per-flavor branching anywhere, and `flavorVariables()`
 turns each palette key into a `--fl-*` custom property by iteration, so a
-colour becomes a CSS variable without any CSS.
+color becomes a CSS variable without any CSS.
 
 ```ts
 {
@@ -117,25 +117,25 @@ colour becomes a CSS variable without any CSS.
 
 Three things will check your work before a human does. TypeScript names any
 palette key you left out. The contrast suite in `lib/ui/themes.test.ts` loops
-`FLAVORS`, so your flavour is tested the moment it exists, with no test to
-write. And a separate test asserts that a flavour is still nothing but those
+`FLAVORS`, so your flavor is tested the moment it exists, with no test to
+write. And a separate test asserts that a flavor is still nothing but those
 four fields, so the two claims above stay true.
 
 Two standards are worth knowing before you start, because both are easier to
 meet up front than to retrofit:
 
-**Cite the colours.** Palettes here name their source — a file in another
-project, a hardware colour table, a published scheme — and mark any value that
+**Cite the colors.** Palettes here name their source — a file in another
+project, a hardware color table, a published scheme — and mark any value that
 was chosen rather than sourced. Read the `far` entry for the shape of it. A
 palette assembled by eye is fine, but say so.
 
 **WCAG AA wins over fidelity.** `fg`, `dim` and `warn` each owe 4.5:1 against
 both backgrounds, and the cursor row and accent chip owe it against their own
-text. Three of the flavours already deviate from their source schemes to clear
+text. Three of the flavors already deviate from their source schemes to clear
 this. If a faithful port fails, bend the port; the test is not negotiable and
 the deviation belongs in a comment.
 
-Run `pnpm gallery` to render every flavour into `.scratch/gallery.html` and
+Run `pnpm gallery` to render every flavor into `.scratch/gallery.html` and
 look at yours next to the others.
 
 ## Git
@@ -200,11 +200,11 @@ suffix.
 Small ones. One idea per pull request.
 
 Say what changed and why. If it is a bug fix, say how to reproduce the bug.
-If it is a behaviour change, say what the old behaviour was and who might miss
+If it is a behavior change, say what the old behavior was and who might miss
 it. If you touched anything users see, a before and after screenshot is worth
 more than a paragraph.
 
-Everything in `pnpm check` has to pass. New behaviour needs a test.
+Everything in `pnpm check` has to pass. New behavior needs a test.
 
 Expect review to be slow and detailed rather than fast and approving. That is
 not a judgement on your work.

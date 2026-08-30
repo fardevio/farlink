@@ -667,7 +667,7 @@ describe("the settings view", () => {
     session.moveSetting(2)
     session.adjustSetting(1)
     session.adjustSetting(-1)
-    // The session knows nothing about colour or chrome.storage.
+    // The session knows nothing about color or chrome.storage.
     expect(changed).toEqual([
       ["theme", 1],
       ["theme", -1]
