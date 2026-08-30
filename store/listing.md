@@ -47,7 +47,7 @@ WHAT YOU GET
 • Alt and the arrows to put the panel in any corner, Alt+S to resize it
 • Alt+comma for settings inside the panel: theme, size and corner, all from the keyboard (Option on macOS)
 • Nothing ever scrolls the page out from under you
-• Thirteen themes on Alt+T: Far Manager, yazi, Catppuccin, Nord, Paper, Solarized Light, High Contrast, Mono, Macintosh 1984, Windows XP, New Vegas, IBM 3270 and Commodore 64, every one checked for contrast
+• Thirteen themes on Alt+T, light and dark, every one checked by test for WCAG AA contrast on body text
 
 PERMISSIONS, AND WHY THERE ARE NONE WORTH THE NAME
 
@@ -66,10 +66,21 @@ NOT A REPLACEMENT FOR
 Vimium, Surfingkeys and Vimari are excellent and FarLink sits alongside them. If you already use one, keep it. FarLink is for the tasks where link hints run out.
 ```
 
+**Do not list the themes by name.** The themes bullet used to enumerate all
+thirteen — Far Manager, yazi, Catppuccin, Nord and so on — and on 2026-08-30 that
+got 0.1.1 rejected under Spam and Placement in the Store, "having excessive
+keywords in the item's description" (violation reference Yellow Argon). Google
+quoted the list back verbatim and cited the Branding Guidelines alongside the
+spam policy, which points at the four third-party trademarks in it: Windows XP,
+Commodore 64, IBM 3270 and Macintosh. The same wording had passed review for
+0.1.0 on 31 July, so this is not a rule that fires reliably; it is one that fires
+eventually. The count, the key and the contrast standard are what a reader
+actually needs, and the themes screenshot shows four of them anyway.
+
 ## Keywords
 
 ```text
-keyboard navigation, vim, vimium alternative, no mouse, accessibility, power user, keyboard shortcuts, productivity, file manager, orthodox, far manager, yazi, link list, filter links, open in background tab
+keyboard navigation, vim, no mouse, accessibility, power user, keyboard shortcuts, productivity, file manager, orthodox, link list, filter links, open in background tab
 ```
 
 ---
@@ -144,8 +155,8 @@ alongside the single-purpose description and the per-permission justifications.
 | Asset | Size | File |
 |---|---|---|
 | Icon | 16/24/32/48/96/128 | `public/icon/*.png`, from `pnpm icons` |
-| Screenshot 1 — Hacker News, the whole index unfiltered: 197 links, title left, address right | 1280×800 | `store/screenshots/1-index.png` |
-| Screenshot 2 — MDN's CSS reference, 1,021 links narrowed to 18 as you type | 1280×800 | `store/screenshots/2-filter.png` |
+| Screenshot 1 — Hacker News, the whole index unfiltered, title left and address right | 1280×800 | `store/screenshots/1-index.png` |
+| Screenshot 2 — MDN's CSS reference, a thousand-odd links narrowed to a screenful as you type | 1280×800 | `store/screenshots/2-filter.png` |
 | Screenshot 3 — four of the thirteen themes: Far Manager, yazi, Paper, Macintosh 1984 | 1280×800 | `store/screenshots/3-themes.png` |
 | Small promo tile | 440×280 | `store/screenshots/promo-440x280.png` |
 | Marquee promo tile | 1400×560 | `store/screenshots/promo-1400x560.png` |
