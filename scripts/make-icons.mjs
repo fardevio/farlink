@@ -19,12 +19,22 @@
  */
 
 import { execFileSync } from "node:child_process"
-import { mkdirSync, rmSync, writeFileSync } from "node:fs"
+import { copyFileSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 
 const BLUE = "#0000aa"
 const OUT = "public/icon"
+
+/**
+ * The size the promo tiles use, and where their copy of it lives.
+ *
+ * 96 rather than 128: the tiles draw it at 48 CSS px and capture at
+ * deviceScaleFactor 2, so 96 lands exactly 1:1 on device pixels. Any other
+ * source size reintroduces the fractional ratio that made the arrow uneven.
+ */
+const TILE_ICON = 96
+const TILE_ICON_PATH = "scripts/shots/icon.png"
 
 /**
  * The sizes Chrome asks for, and one more with a reason.
@@ -209,6 +219,14 @@ for (const canvas of SIZES) {
   if (crisp !== 1) failed = true
   const flag = crisp === 1 ? "" : `  <- ${(crisp * 100).toFixed(1)}% crisp`
   console.log(`  ${String(canvas).padStart(3)}  ${how}${flag}`)
+
+  // The promo tiles need the icon beside their own HTML: the headless browser
+  // that captures them sandboxes file:// reads to the staging directory, so the
+  // tiles cannot reach up into public/. Written here rather than copied by
+  // make-shots.sh so the two can never disagree -- this copy was a committed
+  // hand-made duplicate once, and it silently went stale the first time the
+  // icon changed, which would have baked the old mark into both tiles.
+  if (canvas === TILE_ICON) copyFileSync(file, TILE_ICON_PATH)
 }
 
 rmSync(scratch, { recursive: true, force: true })
