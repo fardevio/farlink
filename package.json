@@ -1,6 +1,6 @@
 {
   "name": "farlink",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Every link on a page, in one keyboard-driven list. A Chrome extension.",
   "keywords": [
     "chrome-extension",

@@ -8,6 +8,18 @@ Notable changes to FarLink. The format follows
 
 Nothing yet.
 
+## [0.1.1]
+
+### Changed
+
+- The icon is redrawn. Every size is now placed pixel by pixel from one rule
+  taking only the canvas, where before 16 to 48 were drawn and 96 and 128 were
+  set in Geist Pixel. The two techniques disagreed: the drawn sizes filled 0.604
+  to 0.625 of their canvas and the font landed on 0.667 at 96 and 0.594 at 128,
+  so the mark changed weight depending on which size Chrome reached for. It is
+  the same drawing at every size now, and slightly bolder throughout.
+- Regenerating the icon no longer needs Geist Pixel installed, only ImageMagick.
+
 ## [0.1.0]
 
 First version. Published to the Chrome Web Store on 31 July 2026.
@@ -39,5 +51,6 @@ First version. Published to the Chrome Web Store on 31 July 2026.
   is written with `textContent`, and `javascript:` URLs are never shown as
   addresses or opened in a tab.
 
-[Unreleased]: https://github.com/fardevio/farlink/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/fardevio/farlink/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/fardevio/farlink/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/fardevio/farlink/releases/tag/v0.1.0

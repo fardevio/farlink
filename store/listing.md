@@ -150,29 +150,36 @@ alongside the single-purpose description and the per-permission justifications.
 | Small promo tile | 440×280 | `store/screenshots/promo-440x280.png` |
 | Marquee promo tile | 1400×560 | `store/screenshots/promo-1400x560.png` |
 
-The icon is U+2197 NORTH EAST ARROW set in **Geist Pixel**, on the `far`
-flavour's panel blue. `pnpm icons` renders it; there is no master raster, because
-scaling one cannot stay crisp. Measured, reducing a 1024px export kept 50% of its
-pixels clean at 16px and 91% at 128px, and smeared the rest into a washed
-lavender that loses contrast against the panel. Rendering at each size is 100%
-clean at all six.
+The icon is a north-east arrow on the `far` flavor's panel blue. `pnpm icons`
+renders it; there is no master raster, because scaling one cannot stay crisp.
+Measured, reducing a 1024px export kept 50% of its pixels clean at 16px and 91%
+at 128px, and smeared the rest into a washed lavender that loses contrast
+against the panel. Rendering at each size is 100% clean at all six.
 
-Two ways of drawing the one glyph, split by what a size can physically hold.
-**16, 24, 32 and 48 are drawn pixel by pixel** from three parts — shaft, two
-barbs — on an explicit grid, because at those sizes there is no room for a
-typeface to be faithful and every pixel has to be placed on purpose. **96 and
-128 are set in Geist Pixel's `Grid` variant**, the blocks-and-gutters form that
-carries the identity; its gutters only land on whole pixels once the glyph is
-about 51px across, which needs a 96px canvas, so below that it aliases into
-unequal lumps.
+**Every size is drawn pixel by pixel** from three parts — two bars and the
+diagonal shaft between them — on an explicit grid, from one rule that takes only
+the canvas:
 
-The point size at those two sizes is not a constant in the script: `solveGlyph`
-searches upward for the first render that comes out square, sits inside the fill
-budget, and lands the grid evenly — at least six blocks to a row, with one block
-width and one gutter width throughout.
+    bar = margin = canvas / 8      box = canvas * 3/4      band = ceil(bar * √2)
 
-Regenerating needs ImageMagick and Geist Pixel installed. Neither ships with the
-extension — the PNGs are committed, so this only matters if the icon changes.
+The three add back to the canvas exactly, with nothing left to round, because
+every size Chrome asks for divides by 8. The band is the diagonal counted in
+columns rather than measured across: a 45° band of n anti-diagonals is only
+n / √2 thick perpendicular to itself, so a shaft drawn at the bar's own count
+reads visibly thinner than the bars it joins. The ceiling errs heavy on purpose.
+A shaft slightly lighter than its bars reads as a mistake; slightly heavier
+reads as a choice.
+
+An earlier version set 96 and 128 in Geist Pixel and drew only 16 to 48. A
+typeface is rasterized for text rather than designed as an icon, and the two
+techniques did not agree with each other: measured against the canvas, the drawn
+sizes filled 0.604 to 0.625 of it while the font landed on 0.667 at 96 and 0.594
+at 128. Nothing chose those numbers — they fell out of a point-size search. One
+rule for all six replaces both the font and the search, and the mark is now the
+same drawing at every size for the first time.
+
+Regenerating needs only ImageMagick, which does not ship with the extension. The
+PNGs are committed, so this only matters if the icon changes.
 
 The two promo tiles are deliberately different compositions rather than one
 scaled to two sizes. The small tile is 1.57:1 and has room for a name and one

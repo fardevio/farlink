@@ -1,45 +1,29 @@
 /**
- * Renders public/icon/*.png. Small sizes are drawn pixel by pixel here; large
- * ones come from the Geist Pixel arrow glyph.
+ * Renders public/icon/*.png. Every size is drawn pixel by pixel from one rule.
  *
- * The mark is a north-east arrow on the far flavour's panel blue, and nothing
+ * The mark is a north-east arrow on the far flavor's panel blue, and nothing
  * scales a master image: reducing a raster of pixel art cannot stay crisp.
  * Measured, downscaling a 1024px export kept half its pixels clean at 16px and
  * 91% at 128px, smearing the rest into a washed lavender that lost contrast
  * against the panel. Everything below is 100%.
  *
- * Two sources, because they are good at different scales.
+ * An earlier version set 96 and 128 in Geist Pixel and drew only 16 to 48. A
+ * typeface is rasterized for text rather than designed as an icon, and the two
+ * techniques did not agree: measured against the canvas, the drawn sizes filled
+ * 0.604 to 0.625 of it while the font landed on 0.667 at 96 and 0.594 at 128.
+ * Nothing chose those numbers; they fell out of a point-size search. One rule
+ * for all six sizes replaces both the font and the search.
  *
- *   Drawn        16 to 48. The mark was set in Geist Pixel originally, but a
- *                typeface is rasterised for text rather than designed as a 16px
- *                icon: at these sizes its arms came out uneven and its diagonal
- *                stepped irregularly. Laid out here instead, from three parts on
- *                an explicit grid, so the arms are one thickness and the
- *                staircase is even. Side by side this is the clearer mark, and
- *                the one that reads as the same drawing at every size.
- *   Geist Pixel  96 and up, where its blocks-and-gutters form is the real design
- *                and lands on whole pixels. Measured, its outline never divides
- *                12 blocks and 11 gutters evenly on a glyph smaller than 51px at
- *                any point size, which needs a 96px canvas.
- *
- * The blocks reach down to 48 by cutting the gutters into the drawn arrow with a
- * lattice. They stop there: below 48 the only lattice that fits is 1px on 1px,
- * and the diagonal stops being a continuous line, so 32 and under are solid.
- * That is how an icon set normally simplifies as it shrinks.
- *
- * Requires ImageMagick 7. Geist Pixel is needed only for 96 and 128. Neither
- * ships with the extension: the PNGs are committed, so this runs when the icon
- * changes and never as part of a build.
+ * Requires ImageMagick 7, which does not ship with the extension: the PNGs are
+ * committed, so this runs when the icon changes and never as part of a build.
  */
 
 import { execFileSync } from "node:child_process"
-import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
-import { homedir, tmpdir } from "node:os"
+import { mkdirSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
 import { join } from "node:path"
 
 const BLUE = "#0000aa"
-const GLYPH = "↗"
-const FONTS = process.env.FONTS ?? join(homedir(), "Library/Fonts")
 const OUT = "public/icon"
 
 /**
@@ -57,18 +41,31 @@ const OUT = "public/icon"
 const SIZES = [16, 24, 32, 48, 96, 128]
 
 /**
- * The drawn sizes.
+ * The one rule, from the canvas alone.
  *
- * `box` is the arrow's own grid, centred on the canvas; the original fills about
- * 62% of it. `stroke` is the bar thickness, held near a fifth of the box so the
- * weight reads the same at every size. `pitch` cuts the block gutters back in: 3
- * gives 2px blocks with 1px gutters, which still reads as blocks.
+ * `bar` is the arm thickness and also the margin, so the mark sits in a box of
+ * three quarters the canvas with an eighth of clear space each side, and the
+ * three add back to the canvas exactly with nothing left to round. Every size
+ * Chrome asks for divides by 8, which is what makes that exact.
+ *
+ * `band` is the diagonal, counted in columns rather than measured across. A 45
+ * degree band of n anti-diagonals is only n / sqrt(2) thick perpendicular to
+ * itself, so a shaft drawn at the bar's own count reads visibly thinner than
+ * the bars it joins. Hence the ceiling rather than a round: at 24 the nearest
+ * integer is 4, which measures 2.83 against a 3px bar, and 5 measures 3.54.
+ * Compared side by side at 208px, 4 read thin and 5 read deliberate. Erring
+ * heavy is the safe direction, because a shaft slightly lighter than its bars
+ * reads as a mistake rather than as a choice.
  */
-const DRAWN = {
-  16: { box: 10, stroke: 2 },
-  24: { box: 15, stroke: 3 },
-  32: { box: 20, stroke: 4 },
-  48: { box: 30, stroke: 6, pitch: 3 }
+function geometry(canvas) {
+  if (canvas % 8 !== 0) {
+    throw new Error(
+      `icon size ${canvas} is not divisible by 8, so the bar and the margin ` +
+        `would not be whole pixels. Sizes must divide by 8.`
+    )
+  }
+  const bar = canvas / 8
+  return { bar, box: (canvas * 3) / 4, band: Math.ceil(bar * Math.SQRT2) }
 }
 
 /**
@@ -86,9 +83,6 @@ const DRAWN = {
  * rounds to square.
  */
 const RADIUS = 0.05
-
-/** How much of the canvas the font glyph should span, for the solved sizes. */
-const FILL = { min: 0.5, max: 0.72, ideal: 0.62 }
 
 const magick = (args) =>
   // stderr is discarded on purpose: the point-size search renders sizes that
@@ -110,21 +104,24 @@ const tmp = (name) => join(scratch, name)
  * The arrow as a grid of booleans: a bar along the top, a bar down the right,
  * and a diagonal shaft between them.
  *
- * The shaft is a band of anti-diagonals, widened so its perpendicular width
- * matches the bars. A 45 degree band of n anti-diagonals measures n / sqrt(2)
- * across, so matching a stroke of s takes about s * sqrt(2) of them.
+ * The shaft is the band of anti-diagonals through the box's bottom-left corner,
+ * which is the sum x + y == box - 1. An even band cannot sit symmetrically on a
+ * single line, so it is biased one column down-right rather than rounded up to
+ * an odd width; 32 wants exactly 6 and reads thin at 5.
  */
-function drawArrow({ box, stroke, pitch }) {
-  const half = Math.max(1, Math.round((stroke * Math.SQRT2 - 1) / 2))
+function drawArrow({ box, bar, band }) {
+  const corner = box - 1
+  const half = Math.floor(band / 2)
   const grid = []
   for (let y = 0; y < box; y++) {
     const row = []
     for (let x = 0; x < box; x++) {
-      const inArrow =
-        y < stroke || x >= box - stroke || Math.abs(x + y - (box - 1)) <= half
-      const kept =
-        !pitch || (x % pitch !== pitch - 1 && y % pitch !== pitch - 1)
-      row.push(inArrow && kept)
+      const sum = x + y
+      row.push(
+        y < bar ||
+          x >= box - bar ||
+          (sum >= corner - half && sum <= corner + band - 1 - half)
+      )
     }
     grid.push(row)
   }
@@ -162,111 +159,6 @@ function gridToPng(grid, canvas, file) {
   return file
 }
 
-function fontPath(variant) {
-  const path = join(FONTS, `GeistPixel-${variant}.ttf`)
-  if (!existsSync(path)) {
-    throw new Error(`${path} not found. Install Geist Pixel.`)
-  }
-  return path
-}
-
-/**
- * The glyph alone, antialiasing off, trimmed to its ink. Null when the point
- * size produced no ink, which the small end of the search does: -trim then
- * writes nothing and there is no image to measure. A result, not a failure.
- */
-function renderGlyph(pointsize, canvas) {
-  const out = tmp(`glyph-${pointsize}.png`)
-  try {
-    magick([
-      "-size",
-      `${canvas * 4}x${canvas * 4}`,
-      "xc:none",
-      "+antialias",
-      "-font",
-      fontPath("Grid"),
-      "-pointsize",
-      String(pointsize),
-      "-fill",
-      "white",
-      "-gravity",
-      "center",
-      "-annotate",
-      "+0+0",
-      GLYPH,
-      "-trim",
-      "+repage",
-      out
-    ])
-    const [w, h] = magick(["identify", "-format", "%w %h", out])
-      .split(" ")
-      .map(Number)
-    return w && h ? { out, w, h } : null
-  } catch {
-    return null
-  }
-}
-
-/** White and blue run lengths along one row. */
-function rowRuns(file, row) {
-  const text = magick([
-    file,
-    "-alpha",
-    "off",
-    "-crop",
-    `100%x1+0+${row}`,
-    "+repage",
-    "-depth",
-    "8",
-    "txt:"
-  ])
-  const lit = [...text.matchAll(/#([0-9A-F]{6})/g)].map(
-    (m) => parseInt(m[1].slice(0, 2), 16) > 200
-  )
-  const out = []
-  for (const on of lit) {
-    if (out.length && out.at(-1).on === on) out.at(-1).n++
-    else out.push({ on, n: 1 })
-  }
-  return out
-}
-
-/** Whether a Grid render landed evenly: one block width, one gutter width. */
-function gridResolves(file, height) {
-  const rows = [0.08, 0.12].map((f) => Math.max(1, Math.floor(height * f)))
-  for (const row of rows) {
-    const runs = rowRuns(file, row)
-    const blocks = new Set(runs.filter((r) => r.on).map((r) => r.n))
-    const gutters = new Set(
-      runs
-        .filter((r) => !r.on)
-        .slice(1, -1)
-        .map((r) => r.n)
-    )
-    if (blocks.size !== 1 || gutters.size > 1) return false
-    if (runs.filter((r) => r.on).length < 6) return false
-  }
-  return true
-}
-
-/** The point size whose glyph is square, fills the canvas, and lands evenly. */
-function solveGlyph(canvas) {
-  const target = canvas * FILL.ideal
-  let best = null
-  for (let ps = 16; ps <= canvas * 2; ps++) {
-    const g = renderGlyph(ps, canvas)
-    if (!g || g.w !== g.h) continue
-    const fill = g.w / canvas
-    if (fill < FILL.min || fill > FILL.max) continue
-    if (!gridResolves(g.out, g.h)) continue
-    const score = Math.abs(g.w - target)
-    if (!best || score < best.score) {
-      best = { ps, glyph: g.w, out: g.out, score }
-    }
-  }
-  return best
-}
-
 function compose(canvas, art) {
   // At least 1: a zero radius makes roundrectangle draw nothing at all.
   const radius = Math.max(1, Math.round(canvas * RADIUS))
@@ -301,28 +193,17 @@ function crispness(file) {
 }
 
 mkdirSync(OUT, { recursive: true })
-console.log("make-icons: 16 to 48 drawn, 96 and up from Geist Pixel")
+console.log("make-icons: every size drawn, box 3/4 of canvas, bar canvas/8")
 
 let failed = false
 for (const canvas of SIZES) {
-  let art
-  let how
-  const drawn = DRAWN[canvas]
-  if (drawn) {
-    art = gridToPng(drawArrow(drawn), canvas, tmp(`drawn-${canvas}.png`))
-    how =
-      `drawn, box ${drawn.box} stroke ${drawn.stroke}` +
-      (drawn.pitch ? `, blocks at pitch ${drawn.pitch}` : ", solid")
-  } else {
-    const solved = solveGlyph(canvas)
-    if (!solved) {
-      console.error(`  ${canvas}: no point size lands the grid on whole pixels`)
-      failed = true
-      continue
-    }
-    art = solved.out
-    how = `Geist Pixel, pointsize ${solved.ps}, glyph ${solved.glyph}px`
-  }
+  const { bar, box, band } = geometry(canvas)
+  const art = gridToPng(
+    drawArrow({ bar, box, band }),
+    canvas,
+    tmp(`drawn-${canvas}.png`)
+  )
+  const how = `box ${box} bar ${bar} band ${band}`
 
   const file = compose(canvas, art)
   const crisp = crispness(file)
