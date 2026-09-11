@@ -56,7 +56,7 @@
     "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.4.2",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10",
+    "vitest": "^4.1.11",
     "wxt": "^0.21.1"
   },
   "pnpm": {
