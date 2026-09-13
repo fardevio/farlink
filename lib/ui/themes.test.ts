@@ -210,13 +210,13 @@ describe("applyFlavor", () => {
  * flavor it is about, so a failure still says which palette broke.
  */
 describe("readable text in every flavor", () => {
-  it("clears AA for dim and warn on both backgrounds", () => {
+  it("clears AA for dim and warn on the surfaces they sit on", () => {
     // `dim` carries role labels, child counts and footer hints; `warn` carries
     // the degraded-anchor notice, which a user must not misread. Both are
     // ordinary-size text, so both owe 4.5:1. This is the reason three palettes
     // deviate from their source schemes — see the comments there.
     for (const { id, palette } of FLAVORS) {
-      const { bg, bgAlt, dim, warn, fg } = palette
+      const { bg, bgAlt, panel, dim, warn, fg } = palette
       expect(contrastRatio(fg, bg), `${id} fg on bg`).toBeGreaterThanOrEqual(
         4.5
       )
@@ -235,6 +235,12 @@ describe("readable text in every flavor", () => {
       expect(
         contrastRatio(warn, bgAlt),
         `${id} warn on bgAlt`
+      ).toBeGreaterThanOrEqual(4.5)
+      // The key bar sits on panel and draws its labels in dim. Untested, Luna
+      // shipped them at 1.02:1, gray on title-bar blue.
+      expect(
+        contrastRatio(dim, panel),
+        `${id} dim on panel`
       ).toBeGreaterThanOrEqual(4.5)
     }
   })

@@ -260,7 +260,11 @@ export const FLAVORS: Flavor[] = [
     palette: {
       bg: "#ece9d8",
       bgAlt: "#d6d3c4",
-      panel: "#0831d9",
+      // Chosen by us. XP would draw the bar in title-bar blue, but the key bar
+      // labels are `dim`, and no gray clears AA on both that blue and the
+      // beige: gray on #0831d9 measured 1.02:1. A pale blue keeps the band at
+      // 6.6:1.
+      panel: "#d6dff7",
       border: "#0054e3",
       fg: "#0a0a0a",
       dim: "#4a4a52",
@@ -359,7 +363,9 @@ export const FLAVORS: Flavor[] = [
     palette: {
       bg: "#fdf6e3",
       bgAlt: "#eee8d5",
-      panel: "#e3dcc6",
+      // Ours, not Solarized's. Light enough that the key bar's `dim` labels
+      // clear AA, 4.55:1, and still a shade apart from base2 above it.
+      panel: "#e8e1cc",
       border: "#93a1a1",
       // Solarized's own body text is base00 #657b83, which is 4.1:1 on base3,
       // the palette predates WCAG AA and does not clear it. Darkened until both

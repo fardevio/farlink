@@ -8,6 +8,14 @@ Notable changes to FarLink. The format follows
 
 Nothing yet.
 
+## [0.1.2]
+
+### Fixed
+
+- The key bar is readable in the Windows XP theme. Its labels were dark gray on
+  title-bar blue at 1.02:1; the bar is now pale blue, at 6.6:1. Solarized
+  Light's bar is a shade lighter too, since its labels sat just under AA.
+
 ## [0.1.1]
 
 ### Changed
@@ -51,6 +59,7 @@ First version. Published to the Chrome Web Store on 31 July 2026.
   is written with `textContent`, and `javascript:` URLs are never shown as
   addresses or opened in a tab.
 
-[Unreleased]: https://github.com/fardevio/farlink/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/fardevio/farlink/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/fardevio/farlink/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/fardevio/farlink/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/fardevio/farlink/releases/tag/v0.1.0
