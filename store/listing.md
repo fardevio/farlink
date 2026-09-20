@@ -12,8 +12,7 @@ FarLink — Every link on a page, by keyboard
 ```
 
 (43 characters; the limit is 45. `test/manifest-limits.test.ts` counts this,
-`short_name` and the description on every run. The previous wording was 49 and
-would have been rejected at upload.)
+`short_name` and the description on every run.)
 
 ## Summary
 
@@ -39,7 +38,6 @@ It is honest about the trade: for clicking a single link you have already spotte
 
 WHAT YOU GET
 
-• Open with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or the toolbar button
 • Every link on the page in one list. Start filtering by typing, matching the title or the address
 • Arrow keys move; letters are left free for typing, never bound to navigation
 • Enter to open it, Alt+Enter to open it in a background tab
@@ -52,7 +50,7 @@ PERMISSIONS, AND WHY THERE ARE NONE WORTH THE NAME
 
 FarLink asks for no access to any website when you install it. The install prompt has no site access in it at all.
 
-By default, when you press Ctrl+Shift+Period (Cmd+Shift+Period on Mac) or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
+By default, when you press the shortcut or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
 
 FarLink never asks for access to all sites, or to any site.
 
@@ -65,16 +63,8 @@ NOT A REPLACEMENT FOR
 Vimium, Surfingkeys and Vimari are excellent and FarLink sits alongside them. If you already use one, keep it. FarLink is for the tasks where link hints run out.
 ```
 
-**Do not list the themes by name.** The themes bullet used to enumerate all
-thirteen — Far Manager, yazi, Catppuccin, Nord and so on — and on 2026-08-30 that
-got 0.1.1 rejected under Spam and Placement in the Store, "having excessive
-keywords in the item's description" (violation reference Yellow Argon). Google
-quoted the list back verbatim and cited the Branding Guidelines alongside the
-spam policy, which points at the four third-party trademarks in it: Windows XP,
-Commodore 64, IBM 3270 and Macintosh. The same wording had passed review for
-0.1.0 on 31 July, so this is not a rule that fires reliably; it is one that fires
-eventually. The count, the key and the contrast standard are what a reader
-actually needs, and the themes screenshot shows four of them anyway.
+**Do not list the themes by name** (store Spam rejection on 0.1.1). Keep count,
+`Alt+T` and AA; names live in the screenshot.
 
 ## Keywords
 
