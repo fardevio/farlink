@@ -88,6 +88,9 @@ policy and the store listing.
 no semicolons, no trailing commas, 80 columns. Imports are sorted by a plugin.
 Do not hand-format; run `pnpm format`.
 
+**Prose** in documentation and `store/` uses curly quotes (“…” and ‘…’). Code
+keeps straight quotes; Prettier does not reformat those files.
+
 **Comments explain why, not what.** The code says what it does. A comment
 earns its place by recording a decision, a measurement, or a trap that is not
 visible from the code. Several comments in this repo cite the bug that made

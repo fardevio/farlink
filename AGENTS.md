@@ -138,6 +138,9 @@ Formatting is Prettier with `.prettierrc.mjs`: double quotes, no semicolons, no
 trailing commas, 80 columns, imports sorted by a plugin. Do not hand-format; run
 `pnpm format`.
 
+Prose in documentation and `store/` uses curly quotes (“…” and ‘…’). Code,
+including Prettier and string literals, keeps straight quotes.
+
 TypeScript is strict, plus `noUncheckedIndexedAccess`, `noImplicitOverride`,
 `noUnusedLocals` and `noUnusedParameters`. `pnpm compile` is `tsc --noEmit`. Do
 not reach for `any` or a non-null assertion to get past a checker complaint;

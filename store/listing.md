@@ -34,7 +34,7 @@ Open FarLink with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or click the tool
 
 The panel sits in a corner so most of the page stays visible. FarLink does not scroll the page.
 
-For a single link you have already spotted, Vimium's hints are faster. FarLink helps when you need to search a long page by title or address.
+For a single link you have already spotted, Vimium’s hints are faster. FarLink helps when you need to search a long page by title or address.
 
 • Every link on the page in one list; type to filter by title or address
 • Arrow keys move; letters are left free for typing
@@ -70,7 +70,7 @@ keyboard navigation, vim, no mouse, accessibility, power user, keyboard shortcut
 ### Single purpose
 
 ```text
-FarLink lists the links on the current web page so they can be reached from the keyboard. It reads the page's DOM to collect each link's accessible name and destination, shows them in a panel the user can filter by either, and opens the selected link, in the same tab or in a new one, when the user presses Enter.
+FarLink lists the links on the current web page so they can be reached from the keyboard. It reads the page’s DOM to collect each link’s accessible name and destination, shows them in a panel the user can filter by either, and opens the selected link, in the same tab or in a new one, when the user presses Enter.
 ```
 
 ### Permission justifications
@@ -78,8 +78,8 @@ FarLink lists the links on the current web page so they can be reached from the 
 | Permission                            | Justification                                                                                                                                                                                                                                                            |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `activeTab`                           | Grants access to the current tab only when the user invokes the extension — by its keyboard shortcut or by clicking its toolbar button — so navigation can be started on a page without requesting access to any site in advance.                                                                                  |
-| `scripting`                           | Injects the extension's own content script into the current tab when the user invokes the shortcut or clicks the toolbar button. This is the only way the panel is ever created; nothing is registered in advance.                                                       |
-| `storage`                             | Stores the user's own settings (theme, panel corner and size) and a per-tab anchor so the selected link can be re-found after the page navigates. The anchor holds that one link's address and identifying attributes plus hashes of its name and text; it is session-scoped, replaced on the next selection, and discarded when the tab closes. No page text is stored.                                                                               |
+| `scripting`                           | Injects the extension’s own content script into the current tab when the user invokes the shortcut or clicks the toolbar button. This is the only way the panel is ever created; nothing is registered in advance.                                                       |
+| `storage`                             | Stores the user’s own settings (theme, panel corner and size) and a per-tab anchor so the selected link can be re-found after the page navigates. The anchor holds that one link’s address and identifying attributes plus hashes of its name and text; it is session-scoped, replaced on the next selection, and discarded when the tab closes. No page text is stored.                                                                               |
 | Host permissions                      | None. The extension declares neither `host_permissions` nor `optional_host_permissions`, so there is no site access to grant and none to revoke.                                                    |
 
 ### Remote code
@@ -94,34 +94,34 @@ Tick **none** of the data-collection categories, and confirm all three
 certifications:
 
 - Not being sold to third parties
-- Not being used or transferred for purposes unrelated to the item's single purpose
+- Not being used or transferred for purposes unrelated to the item’s single purpose
 - Not being used or transferred to determine creditworthiness or for lending
 
 Rationale: FarLink makes no network requests. The only data written is the
-user's own settings, in `chrome.storage.sync`, and a transient anchor for the
+user’s own settings, in `chrome.storage.sync`, and a transient anchor for the
 selected link in `chrome.storage.session`, which is discarded when the tab
 closes.
 
 ### Privacy policy URL
 
-**Required.** Not conditional, and "it never leaves the device" is specifically
+**Required.** Not conditional, and “it never leaves the device” is specifically
 not an exemption. Checked against the [User Data FAQ][faq] on 2026-07-30:
 
-- **FarLink handles user data.** The FAQ's own definition of "handle" names
-  "collecting web browsing activity and any information about the website content
+- **FarLink handles user data.** The FAQ’s own definition of “handle” names
+  “collecting web browsing activity and any information about the website content
   or resources a user requests or interacts with, **including the domains or
-  URLs** the browser interacts with". FarLink reads every link's address and
+  URLs** the browser interacts with”. FarLink reads every link’s address and
   accessible name on the page, which is exactly that. Its examples of user data
-  list "Website content and resources" and "Web browsing activity" outright.
-- **Local-only storage does not exempt it.** FAQ #3: extensions "are required to
+  list “Website content and resources” and “Web browsing activity” outright.
+- **Local-only storage does not exempt it.** FAQ #3: extensions “are required to
   disclose how they handle user data, **even when data is processed or stored
-  locally** on a user's device and is not transmitted to external servers or
-  third parties."
+  locally** on a user’s device and is not transmitted to external servers or
+  third parties.”
 - **`storage.sync` does not exempt it either.** FAQ #14 asks precisely this —
   handles user data but only stores locally or via Chrome Storage Sync — and
-  answers **"Yes. This policy requires all Products that handle user information
-  to post a privacy policy."** It adds that the policy "may not need to be long
-  or complicated", which `store/privacy.md` already satisfies.
+  answers **“Yes. This policy requires all Products that handle user information
+  to post a privacy policy.”** It adds that the policy “may not need to be long
+  or complicated”, which `store/privacy.md` already satisfies.
 
 So the policy URL field is not the conditional one; it has to be filled in
 alongside the single-purpose description and the per-permission justifications.
@@ -136,12 +136,12 @@ alongside the single-purpose description and the per-permission justifications.
 |---|---|---|
 | Icon | 16/24/32/48/96/128 | `public/icon/*.png`, from `pnpm icons` |
 | Screenshot 1 — Hacker News, the whole index unfiltered, title left and address right | 1280×800 | `store/screenshots/1-index.png` |
-| Screenshot 2 — MDN's CSS reference, a thousand-odd links narrowed to a screenful as you type | 1280×800 | `store/screenshots/2-filter.png` |
+| Screenshot 2 — MDN’s CSS reference, a thousand-odd links narrowed to a screenful as you type | 1280×800 | `store/screenshots/2-filter.png` |
 | Screenshot 3 — four of the thirteen themes: Far Manager, yazi, Paper, Macintosh 1984 | 1280×800 | `store/screenshots/3-themes.png` |
 | Small promo tile | 440×280 | `store/screenshots/promo-440x280.png` |
 | Marquee promo tile | 1400×560 | `store/screenshots/promo-1400x560.png` |
 
-The icon is a north-east arrow on the `far` flavor's panel blue. `pnpm icons`
+The icon is a north-east arrow on the `far` flavor’s panel blue. `pnpm icons`
 renders it; there is no master raster, because scaling one cannot stay crisp.
 Measured, reducing a 1024px export kept 50% of its pixels clean at 16px and 91%
 at 128px, and smeared the rest into a washed lavender that loses contrast
@@ -156,7 +156,7 @@ the canvas:
 The three add back to the canvas exactly, with nothing left to round, because
 every size Chrome asks for divides by 8. The band is the diagonal counted in
 columns rather than measured across: a 45° band of n anti-diagonals is only
-n / √2 thick perpendicular to itself, so a shaft drawn at the bar's own count
+n / √2 thick perpendicular to itself, so a shaft drawn at the bar’s own count
 reads visibly thinner than the bars it joins. The ceiling errs heavy on purpose.
 A shaft slightly lighter than its bars reads as a mistake; slightly heavier
 reads as a choice.
@@ -176,7 +176,7 @@ The two promo tiles are deliberately different compositions rather than one
 scaled to two sizes. The small tile is 1.57:1 and has room for a name and one
 line; the marquee is 2.5:1, where that stacked arrangement leaves two thirds of
 the frame empty. So the marquee is the panel itself — the real four bands at
-20px instead of the product's 13px — which is a composition at marquee sizes,
+20px instead of the product’s 13px — which is a composition at marquee sizes,
 not the shrunken screenshot an earlier small tile was.
 
 Its header is drawn in panel blue rather than `bgAlt`. The shipped icon carries
@@ -193,7 +193,7 @@ is captured is what ships. The theme and corner are seeded into
 earlier pass drove the theme with keystrokes and silently produced the wrong
 one.
 
-Anything that changes the panel's width, the key bar or the row height
+Anything that changes the panel’s width, the key bar or the row height
 invalidates all of them, so re-capture the set together rather than one at a
 time. They are gitignored precisely so a stale one cannot sit in the repo
 looking current.
