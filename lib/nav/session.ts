@@ -818,18 +818,25 @@ export class NavSession {
     const at = this.cursorIndexIn(list)
     const next =
       at === -1 ? 0 : Math.min(list.length - 1, Math.max(0, at + delta))
+    // At the end of the list the cursor does not move. Revealing again would
+    // still call scrollIntoView on the same element — and on a sticky header
+    // link that scrolls the page down while Up is held on the first row.
+    if (at === next) return
     this.deliberately(() => this.setCursor(list[next]!))
   }
 
   first(): void {
     const list = this.level()
-    if (list[0]) this.deliberately(() => this.setCursor(list[0]!))
+    const item = list[0]
+    if (!item || this.cursor === item) return
+    this.deliberately(() => this.setCursor(item))
   }
 
   last(): void {
     const list = this.level()
     const item = list[list.length - 1]
-    if (item) this.deliberately(() => this.setCursor(item))
+    if (!item || this.cursor === item) return
+    this.deliberately(() => this.setCursor(item))
   }
 
   private setCursor(node: SemanticNode): void {

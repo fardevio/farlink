@@ -38,16 +38,15 @@ The manifest declares no `host_permissions` and no
 That is the single most important constraint in the project, and a lot follows
 from it.
 
-The user presses `Ctrl+Shift+Space` or clicks the toolbar button. Chrome grants
-`activeTab` for that one invocation, the worker injects the content script, and
-from then on the script is live in that tab until it navigates away.
+The user presses `Ctrl+Shift+Period` (or `Cmd+Shift+Period` on macOS) or
+clicks the toolbar button. Chrome grants `activeTab` for that one invocation,
+the worker injects the content script, and from then on the script is live in
+that tab until it navigates away.
 
 The cost is real: there is no way to have the panel open on page load, and no
-single key can summon it, because a key that worked before the first invocation
-would need a script running on every page.
-once on that page, and there is no way to have the panel open automatically on
-page load. Both were judged cheaper than an install prompt that says "read and
-change all your data on all websites".
+single key can summon it before the first invocation, because that would need a
+script running on every page. Both were judged cheaper than an install prompt
+that says "read and change all your data on all websites".
 
 There used to be a second path, where you granted a specific origin and a
 `document_start` script was registered for it. It is gone. It half worked in a

@@ -8,6 +8,28 @@ Notable changes to FarLink. The format follows
 
 Nothing yet.
 
+## [0.2.0]
+
+### Fixed
+
+- Arrow keys no longer scroll the page when the selected link is already on
+  screen. A header link near the top of the viewport was treated as needing
+  `scrollIntoView`, so pressing Up on the first row (or Down/Up across already
+  visible links) drove the page down — especially on sticky site headers such
+  as Unsplash. Revealing now runs only when the link is outside the visible
+  band, and a no-op move at either end of the list does not reveal again.
+
+### Changed
+
+- The suggested open shortcut is `Ctrl+Shift+Period` /
+  `Cmd+Shift+Period` on both platforms. Space collided with 1Password Quick
+  Access everywhere and, from macOS 27, with "ask Siri about the active
+  window". Period is free in Chrome's published shortcuts and unused by
+  1Password, Bitwarden and Dashlane; Finder's show-hidden chord only applies
+  when Finder is frontmost. Chrome only applies a suggested key on first
+  install, so existing installs keep whatever is already bound; rebind at
+  `chrome://extensions/shortcuts` if Space no longer reaches FarLink.
+
 ## [0.1.2]
 
 ### Fixed
@@ -59,7 +81,8 @@ First version. Published to the Chrome Web Store on 31 July 2026.
   is written with `textContent`, and `javascript:` URLs are never shown as
   addresses or opened in a tab.
 
-[Unreleased]: https://github.com/fardevio/farlink/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/fardevio/farlink/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/fardevio/farlink/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/fardevio/farlink/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/fardevio/farlink/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/fardevio/farlink/releases/tag/v0.1.0

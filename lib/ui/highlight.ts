@@ -124,6 +124,13 @@ const REVEAL_MARGIN = 80
  * `obstruction` is our own panel. Without it the answer is confidently wrong
  * for anything sitting behind it: "comfortably in view" and "covered by the
  * panel" were the same answer.
+ *
+ * Fully inside the band means no scroll, even when the element sits near the
+ * band's edge. A previous REVEAL_MARGIN "scrolloff" treated a header link near
+ * the top as needing `scrollIntoView`, which drove the page *down* — including
+ * when the user pressed Up on the first row and the cursor did not move. Sticky
+ * headers make that jump worse, because `scrollIntoView` aims at the in-flow
+ * position rather than the pinned one.
  */
 export function revealPlan(
   rect: Box,
@@ -140,15 +147,14 @@ export function revealPlan(
     return startVisible ? "none" : "start"
   }
 
-  const above = rect.top < top + REVEAL_MARGIN
-  const below = rect.bottom > bottom - REVEAL_MARGIN
-  if (!above && !below) return "none"
+  // Fully visible in the band: leave the page alone.
+  if (rect.top >= top && rect.bottom <= bottom) return "none"
 
   // `scrollIntoView` centers in the scrollport, not in the band, and with the
-  // panel docked those are different places, because centering a covered element puts
-  // it straight back behind the panel. "start" is the top of the scrollport,
-  // which is inside the band whenever the band is the upper one, and the panel
-  // is bottom-anchored.
+  // panel docked those are different places, because centering a covered
+  // element puts it straight back behind the panel. "start" is the top of the
+  // scrollport, which is inside the band whenever the band is the upper one,
+  // and the panel is bottom-anchored.
   return band < viewport && top === 0 ? "start" : "center"
 }
 
@@ -180,7 +186,10 @@ function isViewportFixed(el: Element): boolean {
   const view = el.ownerDocument.defaultView
   if (!view?.getComputedStyle) return false
   for (let node: Element | null = el; node; node = node.parentElement) {
-    if (view.getComputedStyle(node).position === "fixed") return true
+    const position = view.getComputedStyle(node).position
+    // Sticky pins the same way fixed does once it is stuck: scrollIntoView
+    // aims at the in-flow position and jolts the page without uncovering it.
+    if (position === "fixed" || position === "sticky") return true
   }
   return false
 }

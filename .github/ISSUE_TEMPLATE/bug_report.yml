@@ -26,7 +26,7 @@ body:
       label: How to reproduce it
       placeholder: |
         1. Open https://news.ycombinator.com
-        2. Press Cmd+Shift+Space
+        2. Press Cmd+Shift+Period
         3. Press Alt+T
     validations:
       required: true

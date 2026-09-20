@@ -41,14 +41,14 @@ unpacked** on `build/chrome-mv3`.
 
 ## Keys
 
-Press `Ctrl+Shift+Space` (`Cmd+Shift+Space` on macOS), or click the toolbar
+Press `Ctrl+Shift+Period` (`Cmd+Shift+Period` on macOS), or click the toolbar
 button. That is the only way in, by design: see Permissions below.
 
-**If the shortcut does nothing, another app has it.** On macOS,
-`Cmd+Shift+Space` is 1Password's Quick Access default, and a global hotkey wins
+**If the shortcut does nothing, another app has it.** A global hotkey wins
 before Chrome ever sees the key. Click the toolbar button instead, then rebind
 the shortcut at `chrome://extensions/shortcuts`. The toolbar tooltip tells you
-which chord is actually bound, or that none is.
+which chord is actually bound, or that none is. Existing installs keep whatever
+was already bound; Chrome only applies a suggested key on first install.
 
 | Key | What it does |
 | --- | --- |
@@ -127,9 +127,9 @@ together and why the awkward parts are the way they are.
 
 ## Status
 
-Version 0.1.0, [on the Chrome Web Store][store] since 31 July 2026. It builds,
-it runs, and it is tested on live pages, but it is a first release and has had
-few users. Treat it as early. Bug reports and rough edges are welcome; see
+Version 0.2.0, [on the Chrome Web Store][store] since 31 July 2026. It builds,
+it runs, and it is tested on live pages, but it is still early and has had few
+users. Bug reports and rough edges are welcome; see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence

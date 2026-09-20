@@ -72,8 +72,15 @@ export const MANIFEST = {
         // `default` covers Windows and Linux. A command with only a `mac`
         // binding shows up in chrome://extensions/shortcuts with no key
         // attached everywhere else, which reads as broken rather than unbound.
-        default: "Ctrl+Shift+Space",
-        mac: "Command+Shift+Space"
+        //
+        // Period, not Space: Space is 1Password Quick Access on every platform
+        // and, from macOS 27, "ask Siri about the active window". Both are
+        // global and win before Chrome sees the key. Period is free in Chrome's
+        // published shortcuts and unused by 1Password, Bitwarden and Dashlane.
+        // Finder's ⌘⇧. (show hidden files) only fires when Finder is frontmost;
+        // this command is browser-scoped, so Chrome focus keeps it free.
+        default: "Ctrl+Shift+Period",
+        mac: "Command+Shift+Period"
       }
     }
   }

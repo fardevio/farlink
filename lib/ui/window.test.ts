@@ -64,7 +64,7 @@ describe("badgeText", () => {
 
 describe("shortcutLabel", () => {
   it("reports the chord Chrome gave us", () => {
-    expect(shortcutLabel({ value: "⌘⇧Space" }, false)).toBe("⌘⇧Space")
+    expect(shortcutLabel({ value: "⌘⇧." }, false)).toBe("⌘⇧.")
   })
 
   it("says not bound only on Chrome's own authority", () => {
@@ -74,7 +74,7 @@ describe("shortcutLabel", () => {
 
   it("does not call an unanswered question unbound", () => {
     // The bug this replaces: a failed round-trip printed "not bound" while
-    // Cmd+Shift+Space was working, and the retry guard then latched it for the
+    // Cmd+Shift+Period was working, and the retry guard then latched it for the
     // rest of the page. Unknown and unbound are different facts.
     expect(shortcutLabel(null, false)).toBe("unknown — Enter to check")
     expect(shortcutLabel(null, false)).not.toContain("not bound")

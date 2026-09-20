@@ -27,6 +27,10 @@
     // on every edit, and a misaligned pipe renders identically.
     "MD060": false,
 
+    // Keep a Changelog repeats Added/Changed/Fixed under every version.
+    // Without siblings_only the second ### Changed in the file is an error.
+    "MD024": { "siblings_only": true },
+
     // store/listing.md uses both code block styles for two different jobs:
     // indented for copy pasted verbatim into the store form, fenced with a
     // language for commands meant to be run. One rule cannot allow both.

@@ -50,7 +50,7 @@ function installChrome(): void {
         // `restore` must answer or prime() never resolves and the panel never
         // opens — which would make every test here pass for the wrong reason.
         if (message.type === "restore") cb({ anchor: null })
-        else if (message.type === "shortcut") cb({ chord: "Ctrl+Shift+Space" })
+        else if (message.type === "shortcut") cb({ chord: "Ctrl+Shift+Period" })
         else if (message.type === "open-tabs") cb({ results: [] })
         else cb({ ok: true })
       },

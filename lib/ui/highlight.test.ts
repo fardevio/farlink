@@ -11,6 +11,14 @@ describe("revealPlan", () => {
     expect(revealPlan(rect(0, 200, 900, 100), VIEWPORT)).toBe("none")
   })
 
+  it("leaves a header link at the top of the viewport alone", () => {
+    // The bug this exists for: REVEAL_MARGIN treated top < 80 as "above" the
+    // comfortable band and returned "center"/"start", so revealing the first
+    // row (Home in a sticky header) scrolled the page *down* on Up.
+    expect(revealPlan(rect(20, 12, 120, 36), VIEWPORT)).toBe("none")
+    expect(revealPlan(rect(20, 12, 120, 36), VIEWPORT, PANEL)).toBe("none")
+  })
+
   it("centers a small element that is off screen", () => {
     expect(revealPlan(rect(0, 2000, 900, 100), VIEWPORT)).toBe("center")
     expect(revealPlan(rect(0, -300, 900, 100), VIEWPORT)).toBe("center")

@@ -333,6 +333,26 @@ describe("opening never moves the page", () => {
     expect(revealed).toHaveLength(1)
   })
 
+  it("does not reveal again when Up is pressed on the first row", () => {
+    // Found on Unsplash: the cursor stayed on Home, but each Up still called
+    // reveal → scrollIntoView and the sticky header dragged the page down.
+    const root = storyList()
+    const { host, revealed } = recordingHost()
+    const session = new NavSession(host, root)
+    session.open()
+
+    session.move(-1)
+    session.move(-1)
+    expect(revealed).toHaveLength(0)
+
+    session.move(1)
+    expect(revealed).toHaveLength(1)
+    session.move(-1)
+    session.move(-1)
+    // Back on the first row: further Ups must not re-reveal.
+    expect(revealed).toHaveLength(2)
+  })
+
   it("puts the page back if the user leaves without following anything", () => {
     const root = storyList()
     const { host, scroll } = recordingHost()
