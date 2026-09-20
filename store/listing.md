@@ -18,10 +18,10 @@ would have been rejected at upload.)
 ## Summary
 
 ```text
-Every link on a page in one keyboard-driven list. Filter by title or address, then open it here or in a new tab. No mouse.
+Ctrl+Shift+Period (Cmd on Mac) opens every link on the page in one list. Filter by title or address. No mouse.
 ```
 
-(122 characters; the limit is 132. Identical to the manifest `description`,
+(110 characters; the limit is 132. Identical to the manifest `description`,
 which is what the store actually shows under the name.)
 
 ## Category
@@ -31,9 +31,7 @@ Productivity → Workflow & Planning
 ## Description
 
 ```text
-Link hints are great at clicking one link. They are not great at working through a page.
-
-FarLink opens an index of every link on the page, the title on the left and the address on the right, and lets you filter it by either. Just type: there is no prefix key. Arrow keys move, Enter opens the link, Alt+Enter opens it in a background tab.
+Open FarLink with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or click the toolbar button. That is the only way in: every link on the page appears in one list, title on the left and address on the right, and you can filter by either. Just type: there is no prefix key. Arrow keys move, Enter opens the link, Alt+Enter opens it in a background tab.
 
 The panel is docked to one corner, so most of the page stays visible beside it, and nothing FarLink does ever scrolls the page out from under you.
 
@@ -41,6 +39,7 @@ It is honest about the trade: for clicking a single link you have already spotte
 
 WHAT YOU GET
 
+• Open with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or the toolbar button
 • Every link on the page in one list. Start filtering by typing, matching the title or the address
 • Arrow keys move; letters are left free for typing, never bound to navigation
 • Enter to open it, Alt+Enter to open it in a background tab
@@ -53,7 +52,7 @@ PERMISSIONS, AND WHY THERE ARE NONE WORTH THE NAME
 
 FarLink asks for no access to any website when you install it. The install prompt has no site access in it at all.
 
-By default, when you press the shortcut or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
+By default, when you press Ctrl+Shift+Period (Cmd+Shift+Period on Mac) or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
 
 FarLink never asks for access to all sites, or to any site.
 

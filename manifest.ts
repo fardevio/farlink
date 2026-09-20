@@ -28,10 +28,10 @@ export const ICON_SIZES = Object.fromEntries(
 export const MANIFEST = {
   name: "FarLink — Every link on a page, by keyboard",
   short_name: "FarLink",
-  // The subtitle the Web Store shows. Keep it in step with the product.
+  // The subtitle the Web Store shows. Keep it in step with store/listing.md.
   description:
-    "Every link on a page in one keyboard-driven list. Filter by title or " +
-    "address, then open it here or in a new tab. No mouse.",
+    "Ctrl+Shift+Period (Cmd on Mac) opens every link on the page in one list. " +
+    "Filter by title or address. No mouse.",
   permissions: ["storage", "scripting", "activeTab"],
   minimum_chrome_version: "116",
   /**

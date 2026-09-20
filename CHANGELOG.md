@@ -29,6 +29,8 @@ Nothing yet.
   when Finder is frontmost. Chrome only applies a suggested key on first
   install, so existing installs keep whatever is already bound; rebind at
   `chrome://extensions/shortcuts` if Space no longer reaches FarLink.
+- The store summary and listing lead with `Ctrl+Shift+Period` (`Cmd` on Mac),
+  so the open chord is visible before install.
 
 ## [0.1.2]
 
