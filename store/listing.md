@@ -30,37 +30,28 @@ Productivity → Workflow & Planning
 ## Description
 
 ```text
-Open FarLink with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or click the toolbar button. That is the only way in: every link on the page appears in one list, title on the left and address on the right, and you can filter by either. Just type: there is no prefix key. Arrow keys move, Enter opens the link, Alt+Enter opens it in a background tab.
+Open FarLink with Ctrl+Shift+Period (Cmd+Shift+Period on Mac), or click the toolbar button. Every link on the page appears in one list, title on the left and address on the right. Type to filter by either — there is no prefix key. Arrow keys move, Enter opens the link, Alt+Enter opens it in a background tab.
 
-The panel is docked to one corner, so most of the page stays visible beside it, and nothing FarLink does ever scrolls the page out from under you.
+The panel sits in a corner so most of the page stays visible. FarLink does not scroll the page.
 
-It is honest about the trade: for clicking a single link you have already spotted, Vimium's hints win. Where FarLink pays off is when you do not know where the thing is — a page of four hundred links you want to search by address, and read by destination rather than by position.
+For a single link you have already spotted, Vimium's hints are faster. FarLink helps when you need to search a long page by title or address.
 
-WHAT YOU GET
+• Every link on the page in one list; type to filter by title or address
+• Arrow keys move; letters are left free for typing
+• Enter opens the link; Alt+Enter opens it in a background tab
+• Alt+arrows docks the panel; Alt+S resizes it
+• Alt+comma opens settings (theme, size, corner); Option on macOS
+• Thirteen themes on Alt+T, light and dark, checked for WCAG AA body text
 
-• Every link on the page in one list. Start filtering by typing, matching the title or the address
-• Arrow keys move; letters are left free for typing, never bound to navigation
-• Enter to open it, Alt+Enter to open it in a background tab
-• Alt and the arrows to put the panel in any corner, Alt+S to resize it
-• Alt+comma for settings inside the panel: theme, size and corner, all from the keyboard (Option on macOS)
-• Nothing ever scrolls the page out from under you
-• Thirteen themes on Alt+T, light and dark, every one checked by test for WCAG AA contrast on body text
+PERMISSIONS
 
-PERMISSIONS, AND WHY THERE ARE NONE WORTH THE NAME
-
-FarLink asks for no access to any website when you install it. The install prompt has no site access in it at all.
-
-By default, when you press the shortcut or click the toolbar button, Chrome grants access to that one tab for that one invocation. That is the `activeTab` permission, and it is the whole story. The panel then stays available on that tab until you navigate away, so one key closes and reopens it.
-
-FarLink never asks for access to all sites, or to any site.
+No site access at install. Pressing the shortcut or clicking the toolbar button grants `activeTab` for that one tab, for that one visit. The panel stays available on that tab until you navigate away. There are no host permissions.
 
 PRIVACY
 
-FarLink sends nothing anywhere. There is no server, no analytics, no telemetry, no account. Page content is read in the tab it came from and never leaves it. Your settings live in your browser profile.
+No server, analytics, telemetry, or account. Page content stays in the tab. Settings live in your browser profile.
 
-NOT A REPLACEMENT FOR
-
-Vimium, Surfingkeys and Vimari are excellent and FarLink sits alongside them. If you already use one, keep it. FarLink is for the tasks where link hints run out.
+Alongside Vimium, Surfingkeys, or Vimari — not a replacement for them.
 ```
 
 **Do not list the themes by name** (store Spam rejection on 0.1.1). Keep count,
