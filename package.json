@@ -50,14 +50,14 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "@types/chrome": "^0.2.2",
-    "esbuild": "^0.28.1",
-    "happy-dom": "^20.11.1",
-    "markdownlint-cli2": "^0.23.2",
-    "prettier": "^3.4.2",
+    "@types/chrome": "^0.3.0",
+    "esbuild": "^0.28.2",
+    "happy-dom": "^20.14.5",
+    "markdownlint-cli2": "^0.23.3",
+    "prettier": "^3.9.8",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10",
-    "wxt": "^0.21.1"
+    "vitest": "^5.0.1",
+    "wxt": "^0.21.4"
   },
   "pnpm": {
     "overrides": {
