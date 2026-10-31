@@ -46,6 +46,15 @@ describe("revealPlan with the panel in the way", () => {
     expect(revealPlan(covered, VIEWPORT, PANEL)).toBe("start")
   })
 
+  it("scrolls to the bottom when the panel is docked at the top", () => {
+    // Centering in the scrollport put a covered link at y≈400, still behind a
+    // top-docked panel reaching y=450, so every arrow press revealed it into
+    // the same hiding place.
+    const topPanel = rect(20, 20, 640, 430)
+    const covered = rect(100, 200, 400, 20)
+    expect(revealPlan(covered, VIEWPORT, topPanel)).toBe("end")
+  })
+
   it("leaves an element beside the panel alone", () => {
     expect(revealPlan(rect(900, 600, 400, 20), VIEWPORT, PANEL)).toBe("none")
   })

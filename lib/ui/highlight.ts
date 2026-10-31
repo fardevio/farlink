@@ -106,7 +106,7 @@ function place(box: HTMLElement, rect: DOMRect): void {
   box.style.height = `${rect.height}px`
 }
 
-export type RevealPlan = "none" | "start" | "center"
+export type RevealPlan = "none" | "start" | "center" | "end"
 
 const REVEAL_MARGIN = 80
 
@@ -153,9 +153,10 @@ export function revealPlan(
   // `scrollIntoView` centers in the scrollport, not in the band, and with the
   // panel docked those are different places, because centering a covered
   // element puts it straight back behind the panel. "start" is the top of the
-  // scrollport, which is inside the band whenever the band is the upper one,
-  // and the panel is bottom-anchored.
-  return band < viewport && top === 0 ? "start" : "center"
+  // scrollport, which is inside the band when the panel is docked at the
+  // bottom, and "end" its bottom, which is inside it when docked at the top.
+  if (band === viewport) return "center"
+  return top === 0 ? "start" : "end"
 }
 
 /**
