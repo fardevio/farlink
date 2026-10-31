@@ -267,6 +267,9 @@ export default defineBackground(() => {
               }
               sendResponse({ anchor: saved.anchor })
             })
+            // Every first open waits on this answer, so a rejected read has to
+            // answer too, for the same reason as the `shortcut` case.
+            .catch(() => sendResponse({ anchor: null }))
           return true
         }
 
