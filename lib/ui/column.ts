@@ -152,8 +152,8 @@ export function windowStart(
   const last = Math.max(0, total - maxRows)
   if (total <= maxRows) return 0
 
-  // Nothing selected, or the list changed under the window: show from the top
-  // rather than from wherever the old window happened to be.
+  // Nothing selected, so nothing to keep in view: hold the old window, clamped
+  // in case the list got shorter under it.
   if (activeIndex < 0) return Math.min(previous, last)
 
   const margin = Math.min(MARGIN, Math.floor((maxRows - 1) / 2))

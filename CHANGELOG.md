@@ -6,7 +6,19 @@ Notable changes to FarLink. The format follows
 
 ## [Unreleased]
 
-Nothing yet.
+### Fixed
+
+- On macOS, a character typed with Option can start a filter. Option+L is `@`
+  on a German Mac, and it went to the page instead; AltGr layouts on Windows
+  and Linux already worked.
+- Opening FarLink on a page that had no links yet no longer leaves it on the
+  page structure for good. The link list takes over once links arrive, or on
+  the next open.
+- With the panel docked at the top, moving to a link it covers scrolls that
+  link into view below the panel instead of back behind it.
+- Links inside an element cropped with `clip` or `clip-path` are listed. A crop
+  that started at the top edge was mistaken for screen-reader-only text.
+- The Version row in settings opens the Chrome Web Store listing.
 
 ## [0.2.0]
 
