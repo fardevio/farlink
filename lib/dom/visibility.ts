@@ -28,8 +28,11 @@ const BOXLESS_OK: ReadonlySet<string> = new Set([
   "TRACK"
 ])
 
-const CLIP_RE = /rect\(\s*0(px)?[\s,]/
-const INSET_FULL_RE = /inset\(\s*(50%|100%)/
+// All four values at 0 or 1px, the two spellings of the recipe. Reading only
+// the first misfiled `rect(0px, 500px, 300px, 0px)`, a crop that starts at the
+// top edge, and `inset(50% 0 0 0)` likewise keeps the lower half visible.
+const CLIP_RE = /rect\(\s*[01](px)?([\s,]+[01](px)?){3}\s*\)/
+const INSET_FULL_RE = /inset\(\s*(50%|100%)\s*\)/
 
 /**
  * The `.sr-only` recipe: pull out of flow, shrink to ~1px, and clip. Detecting

@@ -103,6 +103,20 @@ describe("visibilityOf: screen-reader-only", () => {
     }
   })
 
+  it("does not mistake a partial clip for the recipe", () => {
+    // Both patterns used to read only the first value, so a crop that merely
+    // started at the top edge hid a visible region and every link inside it.
+    for (const style of [
+      "position: absolute; clip: rect(0px, 500px, 300px, 0px)",
+      "clip-path: inset(50% 0 0 0)"
+    ]) {
+      const el = one(
+        `<div data-rect="0,0,500,300" data-style="${style}">Gallery</div>`
+      )
+      expect(seen(el), style).toBe("visible")
+    }
+  })
+
   it("treats a zero-rect element carrying text as name material", () => {
     // Not "hidden": an unfingerprinted sr-only variant is far likelier than a
     // real collapsed section, and its text still names an ancestor.
