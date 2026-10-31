@@ -6,6 +6,10 @@ Notable changes to FarLink. The format follows
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.2.1]
+
 ### Fixed
 
 - On macOS, a character typed with Option can start a filter. Option+L is `@`
@@ -95,7 +99,8 @@ First version. Published to the Chrome Web Store on 31 July 2026.
   is written with `textContent`, and `javascript:` URLs are never shown as
   addresses or opened in a tab.
 
-[Unreleased]: https://github.com/fardevio/farlink/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/fardevio/farlink/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/fardevio/farlink/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/fardevio/farlink/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/fardevio/farlink/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/fardevio/farlink/compare/v0.1.0...v0.1.1
