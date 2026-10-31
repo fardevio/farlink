@@ -51,9 +51,8 @@ function stepFlavorId(id: string, delta: 1 | -1): string {
 }
 
 /**
- * Cursor position from the last visit to this tab, fetched once at bootstrap.
- * Deliberately not fetched on activation: the service worker may be asleep, and
- * waiting for it to wake would put a round-trip in front of the HUD appearing.
+ * Cursor position from the last visit to this tab, fetched once by `prime` on
+ * the first activation and consumed by it.
  */
 let restoreAnchor: SerializedAnchor | null = null
 
@@ -77,15 +76,8 @@ const AUTHOR_URL = "https://fardev.io"
 const REPO_LABEL = "fardevio/farlink"
 const REPO_URL = "https://github.com/fardevio/farlink"
 
-/**
- * The Web Store item id, once there is one.
- *
- * Empty until the extension is published, and the Version row is a plain report
- * while it is: a link to a listing that does not exist is worse than no link.
- * Filling this in is the whole change needed to turn the row into one.
- */
-const STORE_ID = ""
-const STORE_URL = `https://chromewebstore.google.com/detail/${STORE_ID}`
+const STORE_URL =
+  "https://chromewebstore.google.com/detail/chfppficohobddfeafagjaecdbacepmh"
 
 class Agent {
   readonly host: HTMLElement
@@ -197,7 +189,7 @@ class Agent {
           key: "version",
           label: "Version",
           value: chrome.runtime.getManifest().version,
-          openable: STORE_ID !== ""
+          openable: true
         },
         { key: "author", label: "Author", value: AUTHOR, openable: true },
         { key: "github", label: "GitHub", value: REPO_LABEL, openable: true }
@@ -470,7 +462,7 @@ class Agent {
         ? REPO_URL
         : key === "author"
           ? AUTHOR_URL
-          : key === "version" && STORE_ID !== ""
+          : key === "version"
             ? STORE_URL
             : null
 

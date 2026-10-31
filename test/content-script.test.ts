@@ -217,3 +217,34 @@ describe("settings persistence", () => {
     ).toEqual(saved)
   })
 })
+
+describe("the settings view", () => {
+  it("opens the store listing from the Version row", async () => {
+    // The row was a plain report until the store id was filled in, and the id
+    // was still empty after the extension went on the store.
+    document.body.innerHTML = '<a href="/one">One</a><a href="/two">Two</a>'
+    await boot()
+    await openPanel()
+
+    const press = (name: string, init: Partial<KeyboardEventInit> = {}) => {
+      const event = key(name, init)
+      Object.defineProperty(event, "isTrusted", { value: true })
+      // happy-dom answers AltGraph with altKey, which turns Alt+comma into a
+      // typed comma. See the note in lib/nav/keymap.test.ts.
+      Object.defineProperty(event, "getModifierState", { value: () => false })
+      window.dispatchEvent(event)
+    }
+    press(",", { altKey: true, code: "Comma" })
+    // Size, Corner, Theme, Shortcut, then over the rule to Version.
+    for (let i = 0; i < 4; i++) press("ArrowDown")
+    press("Enter")
+
+    expect(sent).toContainEqual({
+      type: "open-tabs",
+      urls: [
+        "https://chromewebstore.google.com/detail/chfppficohobddfeafagjaecdbacepmh"
+      ],
+      background: false
+    })
+  })
+})
