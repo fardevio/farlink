@@ -1,13 +1,17 @@
-import { isAltGraph, isLetterChord } from "~/lib/platform"
+import {
+  isAltGraph,
+  isCharacterProduction,
+  isLetterChord
+} from "~/lib/platform"
 
 import type { NavSession } from "./session"
 
 /**
- * Key handling for Normal, Filter and Hint modes.
+ * Key handling for the normal, filter and settings modes.
  *
- * The input/contenteditable/IME guards deliberately live in the content script
- * rather than here: they need `composedPath()` and the real event target, and
- * keeping them at the boundary means this stays a pure state machine.
+ * The `isTrusted` and IME guards deliberately live in the content script
+ * rather than here: keeping them at the boundary means this stays a pure state
+ * machine.
  */
 
 export interface KeymapHooks {
@@ -234,8 +238,14 @@ export class Keymap {
     // AltGr is not one, it is how a character gets typed, and typing a
     // character is now how filtering starts. Without this exception `@` and
     // `{` could not begin a search on the layouts that need AltGr for them.
-    const chord =
-      (event.ctrlKey || event.metaKey || event.altKey) && !isAltGraph(event)
+    //
+    // On macOS Option does AltGr's job and `isAltGraph` is always false, so a
+    // German Mac's Option+L (`@`) fell through to the page. Only Option alone,
+    // though: Cmd+Option is a browser chord whatever character it reports.
+    const typed =
+      isAltGraph(event) ||
+      (!event.ctrlKey && !event.metaKey && isCharacterProduction(event))
+    const chord = (event.ctrlKey || event.metaKey || event.altKey) && !typed
     if (chord) return false
 
     const key = event.key

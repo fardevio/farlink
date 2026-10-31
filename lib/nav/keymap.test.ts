@@ -238,6 +238,36 @@ describe("AltGr keyboards", () => {
   })
 })
 
+describe("Option keyboards on macOS", () => {
+  // Option does AltGr's job on a Mac, but isAltGraph() is always false there,
+  // so every Option-typed character was read as a chord and handed back to the
+  // page: on a German Mac, Option+L is `@` and could not begin a search.
+  const nav = navigator as Navigator & { userAgentData?: unknown }
+  beforeEach(() => {
+    Object.defineProperty(nav, "userAgentData", {
+      value: { platform: "macOS" },
+      configurable: true
+    })
+  })
+  afterEach(() => {
+    delete nav.userAgentData
+  })
+
+  it("types an Option character into the filter", () => {
+    const { session, keymap } = setup()
+    expect(press(keymap, "@", { altKey: true, code: "KeyL" })).toBe(true)
+    expect(session.project().mode).toBe("filter")
+    expect(session.project().filter).toBe("@")
+  })
+
+  it("still leaves Cmd+Option to the browser", () => {
+    const { session, keymap } = setup()
+    const devtools = { altKey: true, metaKey: true, code: "KeyI" }
+    expect(press(keymap, "ˆ", devtools)).toBe(false)
+    expect(session.project().filter).toBe("")
+  })
+})
+
 describe("moving the panel and sizing it", () => {
   it("reaches all four corners on Alt+Arrow", () => {
     const { session, keymap } = setup()
