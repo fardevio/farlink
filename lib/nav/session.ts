@@ -294,6 +294,8 @@ export class NavSession {
   private moved = false
   private awaitingConfirm = false
   private view: View = "links"
+  /** Set while the tree is standing in for an index that had nothing to list. */
+  private fellBack = false
   /** Every link and control on the page, rebuilt with the tree. */
   private links: SemanticNode[] = []
   /** Formatted hrefs, memoized per tree. See `urlFor`. */
@@ -366,11 +368,7 @@ export class NavSession {
     this.busy = false
     this.mode = "normal"
 
-    // A page with no links at all has nothing for the index to list, so fall
-    // through to the tree rather than opening on an empty panel.
-    if (this.view === "links" && this.links.length === 0) {
-      this.view = "structure"
-    }
+    const regained = this.settleView()
 
     if (restore) {
       const found = resolveAnchor(deserializeAnchor(restore), this.root)
@@ -383,6 +381,10 @@ export class NavSession {
     // you were, but `rebuild()` just replaced every node object, so the old
     // one belongs to a tree that no longer exists. Re-find it by element.
     if (this.cursor) this.cursor = this.nodeFor(this.cursor.el)
+    // Kept from the tree, so it may be a node the index does not list.
+    if (regained && this.cursor && !this.links.includes(this.cursor)) {
+      this.cursor = null
+    }
 
     if (!this.cursor) {
       // Draw the panel before choosing where the cursor goes. "Which links can
@@ -628,6 +630,13 @@ export class NavSession {
       if (!isActivatable(this.quality)) this.awaitingConfirm = false
     }
 
+    // A cursor on a tree node that is not a link has nothing to point at in
+    // the index, so it is placed afresh rather than re-anchored.
+    if (this.settleView() && this.cursor && !this.links.includes(this.cursor)) {
+      this.cursor = null
+      this.quality = "exact"
+    }
+
     // A page still loading when the panel opened has no links and so no
     // cursor, and re-anchoring cannot restore what was never there. Without
     // this the list fills in as content arrives and nothing is ever selected.
@@ -673,6 +682,7 @@ export class NavSession {
    * that a flat list of four hundred links does not have.
    */
   setView(view: View): void {
+    this.fellBack = false
     if (this.view === view) return
     this.view = view
     this.filter = ""
@@ -683,6 +693,30 @@ export class NavSession {
     }
     if (!this.cursor) this.cursor = this.level()[0] ?? null
     this.emit()
+  }
+
+  /**
+   * A page with no links at all has nothing for the index to list, so the
+   * panel falls through to the tree rather than opening empty.
+   *
+   * That is a fallback, not a choice, so it lasts only as long as the page has
+   * no links. Nothing in the keymap selects a view, and a fallback that
+   * outlived its cause kept a page that opened while still loading on the tree
+   * for its whole life, across every close and reopen.
+   *
+   * True when the index has just taken back over.
+   */
+  private settleView(): boolean {
+    if (this.fellBack && this.links.length > 0) {
+      this.view = "links"
+      this.fellBack = false
+      return true
+    }
+    if (this.view === "links" && this.links.length === 0) {
+      this.view = "structure"
+      this.fellBack = true
+    }
+    return false
   }
 
   /**

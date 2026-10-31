@@ -585,6 +585,55 @@ describe("a page that was still loading", () => {
     expect(session.cursorElement).toBe(link)
     expect(session.project().cursorIndex).toBe(0)
   })
+
+  it("switches to the link index once links arrive", () => {
+    // An empty page falls back to the tree, and nothing in the keymap selects
+    // a view, so the fallback used to outlive the emptiness that caused it: the
+    // links arrived and the panel kept listing the tree for the life of the
+    // page, across every close and reopen.
+    const root = html(
+      `<div class="list" data-rect="0,0,700,20">` +
+        `<p data-rect="0,0,700,20">Loading the page</p></div>`
+    )
+    const { host } = recordingHost()
+    const session = new NavSession(host, root)
+    session.open()
+    expect(session.project().view).toBe("structure")
+
+    const link = root.ownerDocument.createElement("a")
+    link.setAttribute("href", "https://example.com/late")
+    link.setAttribute("data-rect", "0,30,700,20")
+    link.textContent = "Arrived late"
+    root.firstElementChild!.appendChild(link)
+
+    session.reconcile()
+    expect(session.project().view).toBe("links")
+    expect(session.cursorElement).toBe(link)
+    expect(session.project().cursorIndex).toBe(0)
+  })
+
+  it("lists links on reopening a page that was empty when last opened", () => {
+    const root = html(
+      `<div class="list" data-rect="0,0,700,20">` +
+        `<p data-rect="0,0,700,20">Loading the page</p></div>`
+    )
+    const { host } = recordingHost()
+    const session = new NavSession(host, root)
+    session.open()
+    expect(session.cursorElement).not.toBeNull()
+    session.close()
+
+    const link = root.ownerDocument.createElement("a")
+    link.setAttribute("href", "https://example.com/late")
+    link.setAttribute("data-rect", "0,0,700,20")
+    link.textContent = "Arrived late"
+    root.firstElementChild!.appendChild(link)
+
+    session.open()
+    expect(session.project().view).toBe("links")
+    expect(session.project().breadcrumb).toContain("1 links")
+    expect(session.cursorElement).toBe(link)
+  })
 })
 
 describe("following a fragment on this page", () => {
