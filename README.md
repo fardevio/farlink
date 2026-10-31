@@ -115,7 +115,7 @@ Back and Forward, and FarLink takes them while the panel is open.
 ## Development
 
 ```bash
-pnpm dev      # Chrome with the extension loaded, hot reloading
+pnpm dev      # hot-reloading build; load build/chrome-mv3-dev unpacked
 pnpm check    # format check, typecheck, tests
 pnpm zip      # store-ready package
 ```

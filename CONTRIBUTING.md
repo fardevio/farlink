@@ -9,7 +9,7 @@ You need Node 20 or newer and [pnpm](https://pnpm.io).
 
 ```bash
 pnpm install
-pnpm dev      # launches Chrome with the extension loaded
+pnpm dev      # hot-reloading build; load build/chrome-mv3-dev unpacked
 ```
 
 Before you open a pull request:

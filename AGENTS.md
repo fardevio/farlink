@@ -17,7 +17,7 @@ dependencies.
 
 ```bash
 pnpm install
-pnpm dev      # Chrome with the extension loaded, hot reloading
+pnpm dev      # hot-reloading build; load build/chrome-mv3-dev unpacked
 pnpm check    # format:check, lint:md, compile, test. This is what CI runs.
 ```
 
@@ -126,6 +126,12 @@ relocating that file breaks a required field on a published extension.
 drives the real content-script bundle against live pages. Anything that changes
 the panel width, the key bar or the row height invalidates all of them; capture
 the whole set rather than one.
+
+**`pnpm dev` does not open a browser.** WXT launches one through `web-ext`, an
+optional peer that is deliberately not installed: its Firefox linter brings in
+dependencies with advisories that have no fix. Load `build/chrome-mv3-dev` once
+with **Load unpacked** in `chrome://extensions`; the dev build reloads itself
+after that.
 
 **A beta and its final release share a version as far as Chrome is concerned.**
 Chrome's `version` takes one to four integers, so WXT puts `0.2.0` in `version`
